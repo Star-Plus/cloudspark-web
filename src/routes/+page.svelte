@@ -77,66 +77,73 @@
 		<div
 			class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px]"
 		>
-			<!-- Large Blue Semi-circle Top replaced with Violet -->
+			<!-- 
+				ANIMATED GEOMETRIC SHAPES 
+				Each shape has a unique class 'geo-xx' to target it with specific keyframes.
+			-->
+
+			<!-- 1. Large Violet Semi-circle (Top Right) -->
 			<div
-				class="absolute top-0 right-10 w-64 h-32 bg-[#8B5CF6] rounded-t-full z-10"
+				class="geo-shape geo-1 absolute top-0 right-10 w-64 h-32 bg-[#8B5CF6] rounded-t-full z-10"
 			></div>
 
-			<!-- White Quarter Circle Top Right -->
+			<!-- 2. White Quarter Circle (Top Right Corner) -->
 			<div
-				class="absolute top-0 right-0 w-24 h-24 bg-white rounded-t-full z-20 transform rotate-12"
+				class="geo-shape geo-2 absolute top-0 right-0 w-24 h-24 bg-white rounded-t-full z-20 transform rotate-12"
 			></div>
 
-			<!-- Red Triangle/Slice Left -->
+			<!-- 3. Red Triangle (Top Left) -->
 			<div
-				class="absolute top-10 left-10 w-0 h-0 border-l-[50px] border-l-transparent border-r-[50px] border-r-transparent border-b-[80px] border-b-[#EF4444] transform -rotate-45 z-20"
+				class="geo-shape geo-3 absolute top-10 left-10 w-0 h-0 border-l-[50px] border-l-transparent border-r-[50px] border-r-transparent border-b-[80px] border-b-[#EF4444] transform -rotate-45 z-20"
 			></div>
 
-			<!-- Green Semi-Circle Left -->
+			<!-- 4. Green Semi-Circle (Left) -->
 			<div
-				class="absolute top-32 left-0 w-32 h-64 bg-[#10B981] rounded-l-full z-10"
+				class="geo-shape geo-4 absolute top-32 left-0 w-32 h-64 bg-[#10B981] rounded-l-full z-10"
 			></div>
 
-			<!-- Large Yellow Square flexible center -->
+			<!-- 5. Yellow Square (Center) -->
 			<div
-				class="absolute top-32 left-32 w-48 h-40 bg-[#FCD34D] z-0 shadow-lg"
+				class="geo-shape geo-5 absolute top-32 left-32 w-48 h-40 bg-[#FCD34D] z-0 shadow-lg"
 			></div>
 
-			<!-- White Square/Rect Right of Yellow -->
-			<div class="absolute top-32 left-80 w-32 h-40 bg-white z-0"></div>
-
-			<!-- Green Semi-Circle Right -->
+			<!-- 6. White Rect (Right Center) -->
 			<div
-				class="absolute top-32 right-[-20px] w-32 h-64 bg-[#10B981] rounded-r-full z-10"
+				class="geo-shape geo-6 absolute top-32 left-80 w-32 h-40 bg-white z-0"
 			></div>
 
-			<!-- Yellow Semi-Circle Bottom Left -->
+			<!-- 7. Green Semi-Circle (Right) -->
 			<div
-				class="absolute bottom-10 left-[-10px] w-48 h-24 bg-[#FFF500] rounded-b-full z-20 transform -rotate-12"
+				class="geo-shape geo-7 absolute top-32 right-[-20px] w-32 h-64 bg-[#10B981] rounded-r-full z-10"
 			></div>
 
-			<!-- Small White Semi-Circle Bottom Left decorative -->
+			<!-- 8. Yellow Semi-Circle (Bottom Left) -->
 			<div
-				class="absolute bottom-20 left-[-40px] w-24 h-12 bg-white rounded-t-full z-30 transform -rotate-12"
+				class="geo-shape geo-8 absolute bottom-10 left-[-10px] w-48 h-24 bg-[#FFF500] rounded-b-full z-20 transform -rotate-12"
 			></div>
 
-			<!-- Violet Triangle/Square split bottom center -->
+			<!-- 9. Small White Semi-Circle (Bottom Left decorative) -->
 			<div
-				class="absolute bottom-10 left-32 w-32 h-32 bg-[#8B5CF6] z-10 overflow-hidden"
+				class="geo-shape geo-9 absolute bottom-20 left-[-40px] w-24 h-12 bg-white rounded-t-full z-30 transform -rotate-12"
+			></div>
+
+			<!-- 10. Violet Triangle/Square (Bottom Center) -->
+			<div
+				class="geo-shape geo-10 absolute bottom-10 left-32 w-32 h-32 bg-[#8B5CF6] z-10 overflow-hidden"
 			>
 				<div
 					class="absolute top-0 left-0 w-full h-full bg-white opacity-20 transform -rotate-45 origin-bottom-left"
 				></div>
 			</div>
 
-			<!-- Red Rectangle Bottom Right -->
+			<!-- 11. Red Rectangle (Bottom Right) -->
 			<div
-				class="absolute bottom-0 left-72 w-20 h-40 bg-[#EF4444] z-30 shadow-2xl skew-y-6"
+				class="geo-shape geo-11 absolute bottom-0 left-72 w-20 h-40 bg-[#EF4444] z-30 shadow-2xl skew-y-6"
 			></div>
 
-			<!-- White Quarter Circle Right Bottom -->
+			<!-- 12. White Quarter Circle (Bottom Right) -->
 			<div
-				class="absolute bottom-20 right-10 w-32 h-32 bg-white rounded-br-full z-10 opacity-90"
+				class="geo-shape geo-12 absolute bottom-20 right-10 w-32 h-32 bg-white rounded-br-full z-10 opacity-90"
 			></div>
 		</div>
 	</div>
@@ -875,6 +882,260 @@
 		}
 		50% {
 			transform: translateY(-20px) rotate(var(--tw-rotate, 0deg));
+		}
+	}
+
+	/* Geometric Morph Animations */
+	.geo-shape {
+		transition: all 0.5s ease-in-out;
+		animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+		animation-iteration-count: infinite;
+		animation-direction: alternate;
+		animation-duration: 8s; /* Slow, fluid loop */
+	}
+
+	/* 
+       Keyframe Logic:
+       0%: Original Position & Color
+       50%: "Cloud" Cluster Center Position & Color Cycle (Pink/Purple)
+       100%: Back to Original (handled by alternate direction, but we define unique endpoints for variation if needed, or just let alternate handle it)
+    */
+
+	.geo-1 {
+		animation-name: morph-1;
+	}
+	@keyframes morph-1 {
+		0% {
+			top: 0;
+			right: 2.5rem;
+			background-color: #8b5cf6;
+			transform: none;
+		}
+		50% {
+			top: 25%;
+			right: 40%;
+			background-color: #ec4899;
+			transform: scale(0.8) translate(10px, 20px);
+			border-radius: 50%;
+		}
+	}
+
+	.geo-2 {
+		animation-name: morph-2;
+	}
+	@keyframes morph-2 {
+		0% {
+			top: 0;
+			right: 0;
+			background-color: white;
+			transform: rotate(12deg);
+		}
+		50% {
+			top: 30%;
+			right: 30%;
+			background-color: #a855f7;
+			transform: rotate(45deg) scale(0.5);
+			border-radius: 50%;
+		}
+	}
+
+	.geo-3 {
+		animation-name: morph-3;
+	}
+	@keyframes morph-3 {
+		0% {
+			top: 2.5rem;
+			left: 2.5rem;
+			border-bottom-color: #ef4444;
+			transform: rotate(-45deg);
+		}
+		50% {
+			top: 40%;
+			left: 40%;
+			border-bottom-color: #6366f1;
+			transform: rotate(0deg) scale(0.6);
+		}
+	}
+
+	.geo-4 {
+		animation-name: morph-4;
+	}
+	@keyframes morph-4 {
+		0% {
+			top: 8rem;
+			left: 0;
+			background-color: #10b981;
+			border-radius: 9999px 0 0 9999px;
+		}
+		50% {
+			top: 35%;
+			left: 35%;
+			background-color: #3b82f6;
+			border-radius: 50%;
+			transform: scale(0.7);
+			width: 80px;
+			height: 80px;
+		}
+	}
+
+	.geo-5 {
+		animation-name: morph-5;
+	}
+	@keyframes morph-5 {
+		0% {
+			top: 8rem;
+			left: 8rem;
+			background-color: #fcd34d;
+		}
+		50% {
+			top: 40%;
+			left: 45%;
+			background-color: #ffffff;
+			width: 60px;
+			height: 60px;
+			border-radius: 20%;
+			transform: rotate(180deg);
+		}
+	}
+
+	.geo-6 {
+		animation-name: morph-6;
+	}
+	@keyframes morph-6 {
+		0% {
+			top: 8rem;
+			left: 20rem;
+			background-color: white;
+		}
+		50% {
+			top: 38%;
+			left: 55%;
+			background-color: #8b5cf6;
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			transform: scale(1.1);
+		}
+	}
+
+	.geo-7 {
+		animation-name: morph-7;
+	}
+	@keyframes morph-7 {
+		0% {
+			top: 8rem;
+			right: -20px;
+			background-color: #10b981;
+			border-radius: 0 9999px 9999px 0;
+		}
+		50% {
+			top: 28%;
+			right: 35%;
+			background-color: #ec4899;
+			border-radius: 50%;
+			transform: scale(0.6);
+			width: 70px;
+			height: 70px;
+		}
+	}
+
+	.geo-8 {
+		animation-name: morph-8;
+	}
+	@keyframes morph-8 {
+		0% {
+			bottom: 2.5rem;
+			left: -10px;
+			background-color: #fff500;
+			transform: rotate(-12deg);
+		}
+		50% {
+			bottom: 40%;
+			left: 40%;
+			background-color: #a855f7;
+			transform: rotate(90deg) scale(0.5);
+			border-radius: 50%;
+			width: 50px;
+			height: 50px;
+		}
+	}
+
+	.geo-9 {
+		animation-name: morph-9;
+	}
+	@keyframes morph-9 {
+		0% {
+			bottom: 5rem;
+			left: -40px;
+			background-color: white;
+			transform: rotate(-12deg);
+		}
+		50% {
+			bottom: 45%;
+			left: 30%;
+			background-color: #3b82f6;
+			transform: rotate(0deg) scale(0.8);
+			border-radius: 50%;
+		}
+	}
+
+	.geo-10 {
+		animation-name: morph-10;
+	}
+	@keyframes morph-10 {
+		0% {
+			bottom: 2.5rem;
+			left: 8rem;
+			background-color: #8b5cf6;
+		}
+		50% {
+			bottom: 35%;
+			left: 45%;
+			background-color: #f472b6;
+			transform: scale(0.9);
+			border-radius: 30%;
+		}
+	}
+
+	.geo-11 {
+		animation-name: morph-11;
+	}
+	@keyframes morph-11 {
+		0% {
+			bottom: 0;
+			left: 18rem;
+			background-color: #ef4444;
+			transform: skewY(6deg);
+		}
+		50% {
+			bottom: 40%;
+			left: 50%;
+			background-color: #ffffff;
+			transform: skewY(0deg) scale(0.5);
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+		}
+	}
+
+	.geo-12 {
+		animation-name: morph-12;
+	}
+	@keyframes morph-12 {
+		0% {
+			bottom: 5rem;
+			right: 2.5rem;
+			background-color: white;
+			border-radius: 0 0 9999px 0;
+		}
+		50% {
+			bottom: 30%;
+			right: 40%;
+			background-color: #8b5cf6;
+			border-radius: 50%;
+			transform: scale(0.7);
+			width: 60px;
+			height: 60px;
 		}
 	}
 </style>

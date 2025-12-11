@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from "svelte";
 	import Header from "./Header.svelte";
 	import "../app.css";
 	import "./layout.css";
@@ -6,23 +7,120 @@
 	/** @type {{children: import('svelte').Snippet}} */
 	let { children } = $props();
 
-	// Generate random stars for the background
-	const stars = Array.from({ length: 80 }).map((_, i) => ({
-		id: i,
-		top: Math.random() * 100,
-		left: Math.random() * 100,
-		size: Math.random() * 3 + 1, // 1px to 4px
-		delay: Math.random() * 5,
-		duration: Math.random() * 3 + 2, // 2s to 5s
-		opacity: Math.random() * 0.5 + 0.3, // 0.3 to 0.8
-	}));
+	let canvas;
+
+	onMount(() => {
+		if (!canvas) return; // Guard in case of fast unmounts
+
+		const ctx = canvas.getContext("2d");
+		let animationFrameId;
+		let stars = [];
+		const connectionDistance = 150; // Increased for better connectivity
+		const starCount = 80;
+
+		const resize = () => {
+			if (canvas) {
+				canvas.width = window.innerWidth;
+				canvas.height = window.innerHeight;
+			}
+		};
+
+		class Star {
+			constructor() {
+				this.x = Math.random() * window.innerWidth;
+				this.y = Math.random() * window.innerHeight;
+				this.vx = (Math.random() - 0.5) * 0.3; // Slower, smoother drift
+				this.vy = (Math.random() - 0.5) * 0.3;
+				this.size = Math.random() * 2 + 1;
+				this.baseAlpha = Math.random() * 0.6 + 0.2;
+				this.alpha = this.baseAlpha;
+				this.twinkleSpeed = Math.random() * 0.02 + 0.005;
+				this.twinkleDir = 1;
+			}
+
+			update() {
+				this.x += this.vx;
+				this.y += this.vy;
+
+				// Bounce off edges
+				if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+				if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+				// Twinkle
+				this.alpha += this.twinkleSpeed * this.twinkleDir;
+				if (this.alpha > 0.8 || this.alpha < 0.2) this.twinkleDir *= -1;
+			}
+
+			draw() {
+				ctx.globalAlpha = this.alpha;
+				ctx.fillStyle = "white";
+				ctx.beginPath();
+				ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+				ctx.fill();
+			}
+		}
+
+		const init = () => {
+			stars = [];
+			resize();
+			for (let i = 0; i < starCount; i++) {
+				stars.push(new Star());
+			}
+		};
+
+		const animate = () => {
+			if (!ctx) return;
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+			// Update and draw stars
+			stars.forEach((star) => {
+				star.update();
+				star.draw();
+			});
+
+			// Draw connections
+			ctx.globalAlpha = 1;
+			// Use a very light white/purple connection line
+			ctx.lineWidth = 0.5;
+
+			for (let i = 0; i < stars.length; i++) {
+				for (let j = i + 1; j < stars.length; j++) {
+					const dx = stars[i].x - stars[j].x;
+					const dy = stars[i].y - stars[j].y;
+					const dist = Math.sqrt(dx * dx + dy * dy);
+
+					if (dist < connectionDistance) {
+						// Opacity based on distance (closer = more opaque)
+						const opacity = 1 - dist / connectionDistance;
+						ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.15})`;
+
+						ctx.beginPath();
+						ctx.moveTo(stars[i].x, stars[i].y);
+						ctx.lineTo(stars[j].x, stars[j].y);
+						ctx.stroke();
+					}
+				}
+			}
+
+			animationFrameId = requestAnimationFrame(animate);
+		};
+
+		window.addEventListener("resize", resize);
+		init();
+		animate();
+
+		return () => {
+			window.removeEventListener("resize", resize);
+			cancelAnimationFrame(animationFrameId);
+		};
+	});
 </script>
 
 <div
 	class="app bg-[#050520] text-white min-h-screen font-sans selection:bg-purple-500 selection:text-white relative overflow-hidden"
 >
 	<!-- Global Background Space Ambience (Fixed - Does not scroll) -->
-	<div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+	<div class="fixed inset-0 pointer-events-none z-0">
 		<!-- Nebulas -->
 		<div
 			class="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-purple-900/20 rounded-full blur-[120px] animate-[pulse_8s_ease-in-out_infinite]"
@@ -34,21 +132,9 @@
 			class="absolute top-[40%] left-[30%] w-[400px] h-[400px] bg-cyan-900/10 rounded-full blur-[100px] animate-pulse"
 		></div>
 
-		<!-- Generated Stars -->
-		{#each stars as star (star.id)}
-			<div
-				class="absolute bg-white rounded-full shadow-[0_0_8px_white]"
-				style="
-					top: {star.top}%;
-					left: {star.left}%;
-					width: {star.size}px;
-					height: {star.size}px;
-					opacity: {star.opacity};
-					animation: ping {star.duration}s ease-in-out infinite;
-					animation-delay: {star.delay}s;
-				"
-			></div>
-		{/each}
+		<!-- Constellation Canvas -->
+		<canvas bind:this={canvas} class="absolute inset-0 w-full h-full"
+		></canvas>
 
 		<!-- Drifting Shapes -->
 		<div
@@ -98,17 +184,28 @@
 		background-attachment: fixed;
 	}
 
-	/* Add custom keyframe for better star twinkling if ping is too aggressive */
 	@keyframes twinkle {
 		0%,
 		100% {
 			opacity: 0.3;
-			transform: scale(1);
+			transform: scale(0.8);
 		}
 		50% {
 			opacity: 1;
-			transform: scale(1.5);
-			box-shadow: 0 0 10px white;
+			transform: scale(1.2);
+			box-shadow: 0 0 4px white;
+		}
+	}
+
+	@keyframes drift {
+		0% {
+			transform: translateY(0px) translateX(0px);
+		}
+		50% {
+			transform: translateY(-20px) translateX(10px);
+		}
+		100% {
+			transform: translateY(0px) translateX(0px);
 		}
 	}
 </style>
