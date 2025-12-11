@@ -75,7 +75,7 @@
 	<!-- Right Content - Geometric Composition -->
 	<div class="flex-1 relative w-full h-[500px] hidden lg:block">
 		<div
-			class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px]"
+			class="geometric-art absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px]"
 		>
 			<!-- 
 				ANIMATED GEOMETRIC SHAPES 
@@ -894,248 +894,115 @@
 		animation-duration: 8s; /* Slow, fluid loop */
 	}
 
+	/* Geometric Scatter Interactions */
+	.geo-shape {
+		transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy return */
+	}
+
 	/* 
-       Keyframe Logic:
-       0%: Original Position & Color
-       50%: "Cloud" Cluster Center Position & Color Cycle (Pink/Purple)
-       100%: Back to Original (handled by alternate direction, but we define unique endpoints for variation if needed, or just let alternate handle it)
+       Interaction Logic:
+       Default: Original Position
+       Hover (.geometric-art:hover): Scatter to "Exploded" positions
     */
 
-	.geo-1 {
-		animation-name: morph-1;
-	}
-	@keyframes morph-1 {
-		0% {
-			top: 0;
-			right: 2.5rem;
-			background-color: #8b5cf6;
-			transform: none;
-		}
-		50% {
-			top: 25%;
-			right: 40%;
-			background-color: #ec4899;
-			transform: scale(0.8) translate(10px, 20px);
-			border-radius: 50%;
-		}
+	/* 1. Violet Semi-circle */
+	.geometric-art:hover .geo-1 {
+		top: -20%;
+		right: -20%;
+		background-color: #ec4899;
+		transform: scale(0.5) rotate(45deg);
+		opacity: 0.8;
 	}
 
-	.geo-2 {
-		animation-name: morph-2;
-	}
-	@keyframes morph-2 {
-		0% {
-			top: 0;
-			right: 0;
-			background-color: white;
-			transform: rotate(12deg);
-		}
-		50% {
-			top: 30%;
-			right: 30%;
-			background-color: #a855f7;
-			transform: rotate(45deg) scale(0.5);
-			border-radius: 50%;
-		}
+	/* 2. White Quarter Circle */
+	.geometric-art:hover .geo-2 {
+		top: -15%;
+		right: 10%;
+		background-color: #a855f7;
+		transform: rotate(180deg) scale(0.2);
+		opacity: 0.6;
 	}
 
-	.geo-3 {
-		animation-name: morph-3;
-	}
-	@keyframes morph-3 {
-		0% {
-			top: 2.5rem;
-			left: 2.5rem;
-			border-bottom-color: #ef4444;
-			transform: rotate(-45deg);
-		}
-		50% {
-			top: 40%;
-			left: 40%;
-			border-bottom-color: #6366f1;
-			transform: rotate(0deg) scale(0.6);
-		}
+	/* 3. Red Triangle */
+	.geometric-art:hover .geo-3 {
+		top: -10%;
+		left: -15%;
+		border-bottom-color: #6366f1;
+		transform: rotate(-90deg) scale(0.8);
 	}
 
-	.geo-4 {
-		animation-name: morph-4;
-	}
-	@keyframes morph-4 {
-		0% {
-			top: 8rem;
-			left: 0;
-			background-color: #10b981;
-			border-radius: 9999px 0 0 9999px;
-		}
-		50% {
-			top: 35%;
-			left: 35%;
-			background-color: #3b82f6;
-			border-radius: 50%;
-			transform: scale(0.7);
-			width: 80px;
-			height: 80px;
-		}
+	/* 4. Green Semi-Circle */
+	.geometric-art:hover .geo-4 {
+		top: 30%;
+		left: -30%;
+		background-color: #3b82f6;
+		border-radius: 50%;
+		transform: scale(0.4);
 	}
 
-	.geo-5 {
-		animation-name: morph-5;
-	}
-	@keyframes morph-5 {
-		0% {
-			top: 8rem;
-			left: 8rem;
-			background-color: #fcd34d;
-		}
-		50% {
-			top: 40%;
-			left: 45%;
-			background-color: #ffffff;
-			width: 60px;
-			height: 60px;
-			border-radius: 20%;
-			transform: rotate(180deg);
-		}
+	/* 5. Yellow Square -> Scatter far out */
+	.geometric-art:hover .geo-5 {
+		top: 110%;
+		left: 110%;
+		background-color: #ffffff;
+		transform: scale(0.5) rotate(180deg);
 	}
 
-	.geo-6 {
-		animation-name: morph-6;
-	}
-	@keyframes morph-6 {
-		0% {
-			top: 8rem;
-			left: 20rem;
-			background-color: white;
-		}
-		50% {
-			top: 38%;
-			left: 55%;
-			background-color: #8b5cf6;
-			width: 50px;
-			height: 50px;
-			border-radius: 50%;
-			transform: scale(1.1);
-		}
+	/* 6. White Rect */
+	.geometric-art:hover .geo-6 {
+		top: 120%;
+		left: 80%;
+		background-color: #8b5cf6;
+		transform: scale(1.5);
+		opacity: 0.5;
 	}
 
-	.geo-7 {
-		animation-name: morph-7;
-	}
-	@keyframes morph-7 {
-		0% {
-			top: 8rem;
-			right: -20px;
-			background-color: #10b981;
-			border-radius: 0 9999px 9999px 0;
-		}
-		50% {
-			top: 28%;
-			right: 35%;
-			background-color: #ec4899;
-			border-radius: 50%;
-			transform: scale(0.6);
-			width: 70px;
-			height: 70px;
-		}
+	/* 7. Green Semi-Circle */
+	.geometric-art:hover .geo-7 {
+		top: 50%;
+		right: -40%;
+		background-color: #ec4899;
+		transform: scale(0.6) rotate(-45deg);
 	}
 
-	.geo-8 {
-		animation-name: morph-8;
-	}
-	@keyframes morph-8 {
-		0% {
-			bottom: 2.5rem;
-			left: -10px;
-			background-color: #fff500;
-			transform: rotate(-12deg);
-		}
-		50% {
-			bottom: 40%;
-			left: 40%;
-			background-color: #a855f7;
-			transform: rotate(90deg) scale(0.5);
-			border-radius: 50%;
-			width: 50px;
-			height: 50px;
-		}
+	/* 8. Yellow Semi-Circle */
+	.geometric-art:hover .geo-8 {
+		bottom: -20%;
+		left: -20%;
+		background-color: #a855f7;
+		transform: rotate(180deg) scale(0.5);
 	}
 
-	.geo-9 {
-		animation-name: morph-9;
-	}
-	@keyframes morph-9 {
-		0% {
-			bottom: 5rem;
-			left: -40px;
-			background-color: white;
-			transform: rotate(-12deg);
-		}
-		50% {
-			bottom: 45%;
-			left: 30%;
-			background-color: #3b82f6;
-			transform: rotate(0deg) scale(0.8);
-			border-radius: 50%;
-		}
+	/* 9. Small White Semi-Circle */
+	.geometric-art:hover .geo-9 {
+		bottom: 10%;
+		left: -50%;
+		background-color: #3b82f6;
+		transform: rotate(45deg);
+		opacity: 0.7;
 	}
 
-	.geo-10 {
-		animation-name: morph-10;
-	}
-	@keyframes morph-10 {
-		0% {
-			bottom: 2.5rem;
-			left: 8rem;
-			background-color: #8b5cf6;
-		}
-		50% {
-			bottom: 35%;
-			left: 45%;
-			background-color: #f472b6;
-			transform: scale(0.9);
-			border-radius: 30%;
-		}
+	/* 10. Violet Triangle/Square */
+	.geometric-art:hover .geo-10 {
+		bottom: -30%;
+		left: 20%;
+		background-color: #f472b6;
+		transform: scale(0.2);
 	}
 
-	.geo-11 {
-		animation-name: morph-11;
-	}
-	@keyframes morph-11 {
-		0% {
-			bottom: 0;
-			left: 18rem;
-			background-color: #ef4444;
-			transform: skewY(6deg);
-		}
-		50% {
-			bottom: 40%;
-			left: 50%;
-			background-color: #ffffff;
-			transform: skewY(0deg) scale(0.5);
-			width: 40px;
-			height: 40px;
-			border-radius: 50%;
-		}
+	/* 11. Red Rectangle */
+	.geometric-art:hover .geo-11 {
+		bottom: -40%;
+		left: 80%;
+		background-color: #ffffff;
+		transform: skewY(20deg) scale(1.2);
 	}
 
-	.geo-12 {
-		animation-name: morph-12;
-	}
-	@keyframes morph-12 {
-		0% {
-			bottom: 5rem;
-			right: 2.5rem;
-			background-color: white;
-			border-radius: 0 0 9999px 0;
-		}
-		50% {
-			bottom: 30%;
-			right: 40%;
-			background-color: #8b5cf6;
-			border-radius: 50%;
-			transform: scale(0.7);
-			width: 60px;
-			height: 60px;
-		}
+	/* 12. White Quarter Circle */
+	.geometric-art:hover .geo-12 {
+		bottom: -10%;
+		right: -30%;
+		background-color: #8b5cf6;
+		transform: rotate(90deg);
 	}
 </style>
