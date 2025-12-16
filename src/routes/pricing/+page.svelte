@@ -1,9 +1,47 @@
-<script>
+<script lang="ts">
     import { fade, fly } from "svelte/transition";
     import { onMount } from "svelte";
+    import PaymentModal from "$lib/components/PaymentModal.svelte";
+    import PaymentFrame from "$lib/components/PaymentFrame.svelte";
 
     let mounted = false;
     onMount(() => (mounted = true));
+
+    // Payment modal states
+    let isPaymentModalOpen = false;
+    /**
+     * @type {{ name: any; } | null}
+     */
+    let selectedPlan: { name: any } | null = null;
+    
+    // Payment frame states
+    let isPaymentFrameOpen = false;
+    let paymentProvider = '';
+    let paymentUrl = '';
+
+    function handleSubscribeClick(plan: any) {
+        if (plan.custom) {
+            // Handle contact sales
+            window.location.href = 'mailto:sales@cloudspark.com';
+            return;
+        }
+        
+        selectedPlan = plan;
+        isPaymentModalOpen = true;
+    }
+
+    function handlePaymentCreated(event: any) {
+        const { provider, paymentUrl: url } = event.detail;
+        paymentProvider = provider;
+        paymentUrl = url;
+        isPaymentFrameOpen = true;
+    }
+
+    function handlePaymentFrameClose() {
+        isPaymentFrameOpen = false;
+        paymentProvider = '';
+        paymentUrl = '';
+    }
 
     const plans = [
         {
@@ -56,7 +94,7 @@
             class="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight"
         >
             Choose your <span
-                class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600"
+                class="text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-pink-600"
                 >Arsenal</span
             >.
         </h1>
@@ -71,7 +109,7 @@
     >
         {#each plans as plan}
             <div
-                class="relative group rounded-3xl p-[1px] bg-gradient-to-b from-white/10 to-transparent hover:from-white/30 transition-all duration-300"
+                class="relative group rounded-3xl p-px bg-linear-to-b from-white/10 to-transparent hover:from-white/30 transition-all duration-300"
                 in:fly={{ y: 50, duration: 800, delay: plan.delay }}
             >
                 <!-- Glowing Border Effect for Popular Plan -->
@@ -124,7 +162,7 @@
                     <div class="h-px w-full bg-white/10 mb-8"></div>
 
                     <!-- Features -->
-                    <div class="flex-grow space-y-4 mb-8">
+                    <div class="grow space-y-4 mb-8">
                         <div
                             class="flex justify-between items-center text-gray-300"
                         >
@@ -148,7 +186,7 @@
                         <div class="pt-4">
                             <span
                                 class="block text-sm text-gray-500 uppercase tracking-wide mb-1"
-                                >Dynamic Storage</span
+                                >Extended Storage</span
                             >
                             <span
                                 class="block text-sm text-gray-300 font-medium leading-relaxed"
@@ -160,7 +198,8 @@
 
                     <!-- CTA -->
                     <button
-                        class="w-full py-4 rounded-xl font-bold text-white transition-all duration-300 bg-gradient-to-r {plan.color} hover:shadow-lg hover:brightness-110 active:scale-95"
+                        on:click={() => handleSubscribeClick(plan)}
+                        class="w-full py-4 rounded-xl font-bold text-white transition-all duration-300 bg-linear-to-r {plan.color} hover:shadow-lg hover:brightness-110 active:scale-95 cursor-pointer"
                     >
                         {#if plan.custom}
                             Contact Sales
@@ -173,6 +212,22 @@
         {/each}
     </div>
 </div>
+<!-- Payment Modal -->
+<PaymentModal
+    bind:isOpen={isPaymentModalOpen}
+    planName={selectedPlan?.name || ''}
+    on:paymentCreated={handlePaymentCreated}
+    on:close={() => isPaymentModalOpen = false}
+/>
+
+<!-- Payment Frame -->
+<PaymentFrame
+    bind:isOpen={isPaymentFrameOpen}
+    provider={paymentProvider}
+    paymentUrl={paymentUrl}
+    on:close={handlePaymentFrameClose}
+/>
+
 
 <style>
     /* Add any specific style overrides if needed */
