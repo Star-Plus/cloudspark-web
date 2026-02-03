@@ -102,29 +102,8 @@
 >
 	<!-- Logo area -->
 	<div class="flex items-center gap-2">
-		<img src="Logo_White.png" alt="Cloud Spark Logo" class="size-18" />
+		<img src="logo.png" alt="Cloud Spark Logo" class="size-12" />
 	</div>
-
-	<!-- Navigation -->
-	<nav
-		class="hidden md:flex items-center gap-8 text-xs font-semibold tracking-wider text-gray-300"
-	>
-		<a href="#feature" class="hover:text-white transition-colors uppercase"
-			>Feature</a
-		>
-		<a href="#product" class="hover:text-white transition-colors uppercase"
-			>Product</a
-		>
-		<a href="#career" class="hover:text-white transition-colors uppercase"
-			>Career</a
-		>
-		<a href="#news" class="hover:text-white transition-colors uppercase"
-			>News</a
-		>
-		<a href="#about" class="hover:text-white transition-colors uppercase"
-			>About Us</a
-		>
-	</nav>
 
 	<!-- Right Actions -->
 	<div class="flex items-center gap-6">
@@ -144,6 +123,7 @@
 					d="M19 9l-7 7-7-7"
 				></path></svg>
 		{#if isLoggedIn}
+			<!-- svelte-ignore node_invalid_placement_ssr -->
 			<button
 				class="w-10 h-10 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors"
 				title="User Profile"
@@ -159,6 +139,7 @@
 				</svg>
 			</button>
 		{:else}
+			<!-- svelte-ignore node_invalid_placement_ssr -->
 			<button
 				on:click={handleLoginClick}
 				class="bg-gray-100 cursor-pointer hover:bg-white text-[#050520] text-xs font-bold py-3 px-6 rounded shadow-lg transition-colors uppercase tracking-wide"
