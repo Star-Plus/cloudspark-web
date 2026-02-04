@@ -1,18 +1,16 @@
 <!-- Speed/Performance Section -->
-<section class="w-full py-24 relative z-10 overflow-hidden">
-	<div
-		class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-16"
-	>
+<section class="w-screen relative z-10 overflow-hidden flex items-center justify-center gap-20">
+
 		<!-- Text Content -->
-		<div class="flex-1 z-10">
+		<div class="z-10">
 			<h2
 				class="text-5xl md:text-6xl font-bold text-white leading-tight mb-6"
 			>
 				Less <span
-					class="inline-block w-12 h-12 border-4 border-t-transparent border-[#8B5CF6] rounded-full animate-spin align-middle mx-2"
+					class="inline-block w-12 h-12 border-4 border-t-transparent border-secondary rounded-full animate-spin align-middle mx-2"
 				></span><br />
 				<span
-					class="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-[#8B5CF6]"
+					class="text-transparent bg-clip-text bg-linear-to-r from-accent to-primary"
 					>More Speed.</span
 				>
 			</h2>
@@ -40,7 +38,7 @@
 		</div>
 
 		<!-- Simplistic Laptop Illustration -->
-		<div class="flex-1 relative w-full max-w-lg perspective-1000 group">
+		<div class="relative w-full max-w-lg perspective-1000 group">
 			<!-- Laptop Body Container - Slight 3D rotation effect -->
 			<div
 				class="relative transform transition-transform duration-500 ease-out group-hover:rotate-y-6 group-hover:rotate-x-6 preserve-3d"
@@ -153,5 +151,4 @@
 				class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-violet-600/20 blur-[100px] -z-10 rounded-full pointer-events-none"
 			></div>
 		</div>
-	</div>
 </section>

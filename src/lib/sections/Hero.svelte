@@ -1,276 +1,161 @@
+<script>
+	import Icon from '@iconify/svelte';
+</script>	
+
 <section
-	class="flex flex-col lg:flex-row items-center justify-between w-full h-full pt-10 lg:pt-20 relative"
+	class="w-screen h-screen flex flex-col items-center justify-center relative overflow-hidden"
 >
-	<!-- Left Content -->
-	<div class="flex-1 w-full lg:max-w-xl z-10">
+	<div class="vcs-bg" aria-hidden="true">
+		<div class="vcs-paper"></div>
+		<svg class="vcs-sketch" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
+			<g class="sketch-lines">
+				<path id="sketch-path-1" class="line l1" d="M 80 520 C 240 420, 380 430, 560 320 S 860 160, 1120 240" />
+				<path id="sketch-path-2" class="line l2" d="M 120 580 C 260 500, 360 520, 540 420 S 760 280, 1040 320" />
+				<path id="sketch-path-3" class="line l3" d="M 160 400 C 300 320, 420 330, 600 220 S 860 120, 1120 160" />
+			</g>
+		</svg>
+		<div class="vcs-flow-icons" aria-hidden="true">
+			<span class="flow-icon flow-1 i1"><Icon icon="mdi:play-circle-outline" /></span>
+			<span class="flow-icon flow-1 i2"><Icon icon="mdi:music-circle-outline" /></span>
+			<span class="flow-icon flow-1 i3"><Icon icon="mdi:image-outline" /></span>
+			<span class="flow-icon flow-2 i1"><Icon icon="mdi:headphones" /></span>
+			<span class="flow-icon flow-2 i2"><Icon icon="mdi:play-box-outline" /></span>
+			<span class="flow-icon flow-2 i3"><Icon icon="mdi:video-outline" /></span>
+			<span class="flow-icon flow-3 i1"><Icon icon="mdi:video-image" /></span>
+			<span class="flow-icon flow-3 i2"><Icon icon="mdi:music-note-outline" /></span>
+			<span class="flow-icon flow-3 i3"><Icon icon="mdi:image-multiple-outline" /></span>
+		</div>
+	</div>
+
 		<h1
 			class="text-5xl lg:text-7xl font-bold leading-tight mb-6 tracking-wide"
 		>
 			<span class="text-white">Cloud</span><span
-				class="text-[#8B5CF6] inline-block transform -rotate-12 origin-bottom-left ml-1"
+				class="text-primary inline-block transform -rotate-12 origin-bottom-left ml-1"
 				>✦</span
 			><span class="text-white">Spark</span><br />
-			<span class="text-[#10B981] relative">
-				compression
+			<span class="text-secondary relative">
+				VCS
 				<!-- Decorative semicircle mimicking the 'e' in reference -->
 				<span
-					class="absolute -left-4 top-1/2 -translate-y-1/2 w-6 h-6 bg-[#10B981] rounded-full -z-10 opacity-50 blur-sm"
+					class="absolute -left-4 top-1/2 -translate-y-1/2 w-6 h-6 bg-secondary rounded-full -z-10 opacity-50 blur-sm"
 				></span>
 			</span>
-			<span class="text-[#FFF500] italic"> tool</span>
+			<span class="text-accent italic"> tool</span>
 		</h1>
 
 		<p
-			class="text-gray-300 text-sm lg:text-base leading-relaxed mb-10 max-w-md"
+			class="text-txt-muted text-sm lg:text-base leading-relaxed mb-10 max-w-md text-center"
 		>
-			With our advanced compression algorithms, digital artists can reduce
-			file sizes without losing quality. We enable you to manage your
-			portfolio and delivery process seamlessly.
+			Experience faster uploads and
+			downloads, saving you valuable time and bandwidth.
 		</p>
 
-		<!-- Search / Action Bar -->
-		<div
-			class="bg-white p-1 rounded-md flex items-center max-w-md w-full shadow-2xl mb-4"
-		>
-			<div class="px-4 text-gray-400">
-				<svg
-					class="w-5 h-5"
-					fill="none"
-					stroke="currentColor"
-					viewBox="0 0 24 24"
-					><path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-					></path></svg
-				>
-			</div>
-			<input
-				type="text"
-				placeholder="Drop your files here..."
-				class="flex-1 py-3 outline-none text-gray-800 placeholder-gray-400"
-			/>
-			<button
-				class="bg-[#8B5CF6] hover:bg-violet-600 text-white font-bold py-3 px-8 rounded text-sm transition-colors uppercase"
-			>
-				Start Now
-			</button>
-		</div>
-		<p class="text-gray-500 text-xs pl-2">* Free for early access users.</p>
+
+	<div>
+		<button class="flex gap-2 items-center bg-white hover:bg-gray-200 text-gray-800 font-semibold py-3 px-6 rounded-lg shadow-lg transition-colors duration-300 cursor-pointer">
+			<Icon icon="mage:microsoft-windows" class="text-2xl" />
+			<span class="text-sm">
+				Download CloudSpark
+			</span>
+		</button>
 	</div>
-
-	<!-- Right Content - Geometric Composition -->
-	<div class="flex-1 relative w-full h-[500px] hidden lg:block">
-		<div
-			class="geometric-art absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px]"
-		>
-			<!-- 
-				ANIMATED GEOMETRIC SHAPES 
-				Each shape has a unique class 'geo-xx' to target it with specific keyframes.
-			-->
-
-			<!-- 1. Large Violet Semi-circle (Top Right) -->
-			<div
-				class="geo-shape geo-1 absolute top-0 right-10 w-64 h-32 bg-[#8B5CF6] rounded-t-full z-10"
-			></div>
-
-			<!-- 2. White Quarter Circle (Top Right Corner) -->
-			<div
-				class="geo-shape geo-2 absolute top-0 right-0 w-24 h-24 bg-white rounded-t-full z-20 transform rotate-12"
-			></div>
-
-			<!-- 3. Red Triangle (Top Left) -->
-			<div
-				class="geo-shape geo-3 absolute top-10 left-10 w-0 h-0 border-l-50 border-l-transparent border-r-50 border-r-transparent border-b-80 border-b-[#EF4444] transform -rotate-45 z-20"
-			></div>
-
-			<!-- 4. Green Semi-Circle (Left) -->
-			<div
-				class="geo-shape geo-4 absolute top-32 left-0 w-32 h-64 bg-[#10B981] rounded-l-full z-10"
-			></div>
-
-			<!-- 5. Yellow Square (Center) -->
-			<div
-				class="geo-shape geo-5 absolute top-32 left-32 w-48 h-40 bg-[#FCD34D] z-0 shadow-lg"
-			></div>
-
-			<!-- 6. White Rect (Right Center) -->
-			<div
-				class="geo-shape geo-6 absolute top-32 left-80 w-32 h-40 bg-white z-0"
-			></div>
-
-			<!-- 7. Green Semi-Circle (Right) -->
-			<div
-				class="geo-shape geo-7 absolute top-32 -right-5 w-32 h-64 bg-[#10B981] rounded-r-full z-10"
-			></div>
-
-			<!-- 8. Yellow Semi-Circle (Bottom Left) -->
-			<div
-				class="geo-shape geo-8 absolute bottom-10 -left-2.5 w-48 h-24 bg-[#FFF500] rounded-b-full z-20 transform -rotate-12"
-			></div>
-
-			<!-- 9. Small White Semi-Circle (Bottom Left decorative) -->
-			<div
-				class="geo-shape geo-9 absolute bottom-20 -left-10 w-24 h-12 bg-white rounded-t-full z-30 transform -rotate-12"
-			></div>
-
-			<!-- 10. Violet Triangle/Square (Bottom Center) -->
-			<div
-				class="geo-shape geo-10 absolute bottom-10 left-32 w-32 h-32 bg-[#8B5CF6] z-10 overflow-hidden"
-			>
-				<div
-					class="absolute top-0 left-0 w-full h-full bg-white opacity-20 transform -rotate-45 origin-bottom-left"
-				></div>
-			</div>
-
-			<!-- 11. Red Rectangle (Bottom Right) -->
-			<div
-				class="geo-shape geo-11 absolute bottom-0 left-72 w-20 h-40 bg-[#EF4444] z-30 shadow-2xl skew-y-6"
-			></div>
-
-			<!-- 12. White Quarter Circle (Bottom Right) -->
-			<div
-				class="geo-shape geo-12 absolute bottom-20 right-10 w-32 h-32 bg-white rounded-br-full z-10 opacity-90"
-			></div>
-		</div>
-	</div>
+	
 </section>
 
 <style>
-	/* Custom font adjustments if needed, though Tailwind handles most */
-	
-
-	
-
-	@keyframes float {
-		0%,
-		100% {
-			transform: translateY(0px) rotate(var(--tw-rotate, 0deg));
-		}
-		50% {
-			transform: translateY(-20px) rotate(var(--tw-rotate, 0deg));
-		}
+	.vcs-bg {
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		overflow: hidden;
+		background: radial-gradient(800px 600px at 10% 10%, rgba(120, 90, 255, 0.16), transparent 60%),
+			radial-gradient(700px 600px at 85% 20%, rgba(183, 0, 255, 0.12), transparent 55%);
 	}
 
-	/* Geometric Morph Animations */
-	.geo-shape {
-		transition: all 0.5s ease-in-out;
-		animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-		animation-iteration-count: infinite;
-		animation-direction: alternate;
-		animation-duration: 8s; /* Slow, fluid loop */
-	}
-
-	/* Geometric Scatter Interactions */
-	.geo-shape {
-		transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy return */
-	}
-
-	/* 
-       Interaction Logic:
-       Default: Original Position
-       Hover (.geometric-art:hover): Scatter to "Exploded" positions
-    */
-
-	/* 1. Violet Semi-circle */
-	.geometric-art:hover .geo-1 {
-		top: -20%;
-		right: -20%;
-		background-color: #ec4899;
-		transform: scale(0.5) rotate(45deg);
-		opacity: 0.8;
-	}
-
-	/* 2. White Quarter Circle */
-	.geometric-art:hover .geo-2 {
-		top: -15%;
-		right: 10%;
-		background-color: #a855f7;
-		transform: rotate(180deg) scale(0.2);
+	.vcs-paper {
+		position: absolute;
+		inset: 0;
+		background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='0.06'/></svg>");
+		mix-blend-mode: soft-light;
 		opacity: 0.6;
 	}
 
-	/* 3. Red Triangle */
-	.geometric-art:hover .geo-3 {
+	.vcs-sketch {
+		position: absolute;
+		inset: 0;
+		width: 120%;
+		height: 120%;
+		left: -10%;
 		top: -10%;
-		left: -15%;
-		border-bottom-color: #6366f1;
-		transform: rotate(-90deg) scale(0.8);
+		pointer-events: none;
 	}
 
-	/* 4. Green Semi-Circle */
-	.geometric-art:hover .geo-4 {
-		top: 30%;
-		left: -30%;
-		background-color: #3b82f6;
-		border-radius: 50%;
-		transform: scale(0.4);
+	.vcs-sketch .line {
+		fill: none;
+		stroke: rgba(255, 255, 255, 0.32);
+		stroke-width: 2;
+		stroke-linecap: round;
+		stroke-dasharray: 2 10;
+		animation: sketch-drift 12s linear infinite;
 	}
 
-	/* 5. Yellow Square -> Scatter far out */
-	.geometric-art:hover .geo-5 {
-		top: 110%;
-		left: 110%;
-		background-color: #ffffff;
-		transform: scale(0.5) rotate(180deg);
+	.vcs-sketch .l2 { opacity: 0.24; animation-delay: -2.5s; }
+	.vcs-sketch .l3 { opacity: 0.18; animation-delay: -5s; }
+
+	.vcs-flow-icons {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.2));
 	}
 
-	/* 6. White Rect */
-	.geometric-art:hover .geo-6 {
-		top: 120%;
-		left: 80%;
-		background-color: #8b5cf6;
-		transform: scale(1.5);
-		opacity: 0.5;
+	.flow-icon {
+		position: absolute;
+		color: rgba(255, 255, 255, 0.65);
+		font-size: 18px;
+		width: 20px;
+		height: 20px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		offset-rotate: 0deg;
+		offset-anchor: 50% 50%;
+		animation: flow-move 20s linear infinite;
 	}
 
-	/* 7. Green Semi-Circle */
-	.geometric-art:hover .geo-7 {
-		top: 50%;
-		right: -40%;
-		background-color: #ec4899;
-		transform: scale(0.6) rotate(-45deg);
+	.flow-1 { offset-path: path("M 80 520 C 240 420, 380 430, 560 320 S 860 160, 1120 240"); }
+	.flow-2 { offset-path: path("M 120 580 C 260 500, 360 520, 540 420 S 760 280, 1040 320"); }
+	.flow-3 { offset-path: path("M 160 400 C 300 320, 420 330, 600 220 S 860 120, 1120 160"); }
+
+	.flow-1.i1 { animation-duration: 18s; animation-delay: 0s; }
+	.flow-1.i2 { animation-duration: 18s; animation-delay: -6s; }
+	.flow-1.i3 { animation-duration: 18s; animation-delay: -12s; }
+
+	.flow-2.i1 { animation-duration: 22s; animation-delay: -3s; opacity: 0.55; }
+	.flow-2.i2 { animation-duration: 22s; animation-delay: -10s; opacity: 0.55; }
+	.flow-2.i3 { animation-duration: 22s; animation-delay: -17s; opacity: 0.55; }
+
+	.flow-3.i1 { animation-duration: 26s; animation-delay: -4s; opacity: 0.5; }
+	.flow-3.i2 { animation-duration: 26s; animation-delay: -12s; opacity: 0.5; }
+	.flow-3.i3 { animation-duration: 26s; animation-delay: -20s; opacity: 0.5; }
+
+	@keyframes sketch-drift {
+		0% { stroke-dashoffset: 0; }
+		100% { stroke-dashoffset: -90; }
 	}
 
-	/* 8. Yellow Semi-Circle */
-	.geometric-art:hover .geo-8 {
-		bottom: -20%;
-		left: -20%;
-		background-color: #a855f7;
-		transform: rotate(180deg) scale(0.5);
+	@keyframes flow-move {
+		0% { offset-distance: 0%; opacity: 0.2; }
+		10% { opacity: 0.7; }
+		90% { opacity: 0.7; }
+		100% { offset-distance: 100%; opacity: 0.2; }
 	}
 
-	/* 9. Small White Semi-Circle */
-	.geometric-art:hover .geo-9 {
-		bottom: 10%;
-		left: -50%;
-		background-color: #3b82f6;
-		transform: rotate(45deg);
-		opacity: 0.7;
-	}
-
-	/* 10. Violet Triangle/Square */
-	.geometric-art:hover .geo-10 {
-		bottom: -30%;
-		left: 20%;
-		background-color: #f472b6;
-		transform: scale(0.2);
-	}
-
-	/* 11. Red Rectangle */
-	.geometric-art:hover .geo-11 {
-		bottom: -40%;
-		left: 80%;
-		background-color: #ffffff;
-		transform: skewY(20deg) scale(1.2);
-	}
-
-	/* 12. White Quarter Circle */
-	.geometric-art:hover .geo-12 {
-		bottom: -10%;
-		right: -30%;
-		background-color: #8b5cf6;
-		transform: rotate(90deg);
+	@media (prefers-reduced-motion: reduce) {
+		.vcs-sketch .line,
+		.flow-icon {
+			animation: none !important;
+		}
 	}
 </style>

@@ -102,7 +102,7 @@
 >
 	<!-- Logo area -->
 	<div class="flex items-center gap-2">
-		<img src="logo.png" alt="Cloud Spark Logo" class="size-12" />
+		<img src="logo.png" alt="Cloud Spark Logo" class="size-8" />
 	</div>
 
 	<!-- Right Actions -->
@@ -110,18 +110,6 @@
 		<button
 			class="text-xs font-semibold text-gray-300 hover:text-white uppercase flex items-center gap-1"
 		>
-			Eng
-			<svg
-				class="w-3 h-3"
-				fill="none"
-				stroke="currentColor"
-				viewBox="0 0 24 24"
-				><path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M19 9l-7 7-7-7"
-				></path></svg>
 		{#if isLoggedIn}
 			<!-- svelte-ignore node_invalid_placement_ssr -->
 			<button

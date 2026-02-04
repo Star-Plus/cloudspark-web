@@ -15,7 +15,7 @@
 			>
 				Loved by creators<br />
 				<span
-					class="text-transparent bg-clip-text bg-linear-to-r from-[#8B5CF6] to-cyan-400"
+					class="text-transparent bg-clip-text bg-linear-to-r from-primary to-accent"
 					>worldwide</span
 				>
 			</h2>
@@ -254,7 +254,7 @@
 				<p class="text-xs text-gray-300">
 					"Wait, you guys answer me quick when I ask something.
 					Appreciate it!"
-				</p>
+				</p> 
 			</div>
 		</div>
 	</div>
