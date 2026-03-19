@@ -1,154 +1,103 @@
-<!-- Speed/Performance Section -->
-<section class="w-screen relative z-10 overflow-hidden flex items-center justify-center gap-20">
-
-		<!-- Text Content -->
-		<div class="z-10">
-			<h2
-				class="text-5xl md:text-6xl font-bold text-white leading-tight mb-6"
-			>
-				Less <span
-					class="inline-block w-12 h-12 border-4 border-t-transparent border-secondary rounded-full animate-spin align-middle mx-2"
-				></span><br />
-				<span
-					class="text-transparent bg-clip-text bg-linear-to-r from-accent to-primary"
-					>More Speed.</span
-				>
-			</h2>
-			<p class="text-gray-300 text-lg leading-relaxed max-w-lg mb-8">
-				Your creative workflow shouldn't be bottlenecked by slow tools.
-				CloudSpark processes thousands of images in seconds, utilizing
-				advanced GPU acceleration to keep you in the flow.
-			</p>
-
-			<div class="flex gap-4">
-				<div class="flex flex-col">
-					<span class="text-3xl font-bold text-white">10x</span>
-					<span class="text-xs text-gray-500 uppercase tracking-wider"
-						>Faster</span
-					>
-				</div>
-				<div class="w-px h-12 bg-gray-700"></div>
-				<div class="flex flex-col">
-					<span class="text-3xl font-bold text-white">0%</span>
-					<span class="text-xs text-gray-500 uppercase tracking-wider"
-						>Quality Loss</span
-					>
-				</div>
-			</div>
+<!-- Metrics Stats Strip -->
+<section class="metrics">
+	<div class="metrics-card">
+		<!-- Stat 1 -->
+		<div class="stat">
+			<span class="stat-label">Active Repositories</span>
+			<span class="stat-value">+2M</span>
+			<span class="stat-sub">Across 120+ creators</span>
 		</div>
 
-		<!-- Simplistic Laptop Illustration -->
-		<div class="relative w-full max-w-lg perspective-1000 group">
-			<!-- Laptop Body Container - Slight 3D rotation effect -->
-			<div
-				class="relative transform transition-transform duration-500 ease-out group-hover:rotate-y-6 group-hover:rotate-x-6 preserve-3d"
-			>
-				<!-- Screen Lid -->
-				<div
-					class="relative bg-[#1a1a2e] rounded-t-2xl p-2 pb-0 shadow-2xl border border-white/10 w-full aspect-16/10"
-				>
-					<!-- Webcam dot -->
-					<div
-						class="absolute top-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-gray-600 rounded-full"
-					></div>
+		<div class="stat-divider" aria-hidden="true"></div>
 
-					<!-- Screen Display -->
-					<div
-						class="bg-[#0f0f1a] w-full h-full rounded-t-lg overflow-hidden relative"
-					>
-						<!-- Mock App UI -->
-						<div class="absolute inset-0 flex">
-							<!-- Sidebar -->
-							<div
-								class="w-16 h-full bg-[#13131f] border-r border-white/5 flex flex-col items-center py-4 gap-3"
-							>
-								<div
-									class="w-8 h-8 rounded-full bg-white/10"
-								></div>
-								<div
-									class="w-8 h-8 rounded-full bg-white/5"
-								></div>
-								<div
-									class="w-8 h-8 rounded-full bg-white/5"
-								></div>
-							</div>
-							<!-- Main Content -->
-							<div class="flex-1 p-4">
-								<div
-									class="flex justify-between items-center mb-4"
-								>
-									<div
-										class="w-32 h-4 bg-white/10 rounded"
-									></div>
-									<div
-										class="w-20 h-8 bg-[#8B5CF6] rounded text-[10px] text-white flex items-center justify-center"
-									>
-										Export
-									</div>
-								</div>
-								<!-- Image Grid -->
-								<div class="grid grid-cols-2 gap-3">
-									<div
-										class="aspect-video bg-linear-to-br from-green-400/20 to-emerald-600/20 rounded border border-white/5 relative group/img"
-									>
-										<div
-											class="absolute inset-0 flex items-center justify-center text-green-400 text-xs font-mono"
-										>
-											-80%
-										</div>
-									</div>
-									<div
-										class="aspect-video bg-linear-to-br from-purple-400/20 to-violet-600/20 rounded border border-white/5 relative"
-									>
-										<div
-											class="absolute inset-0 flex items-center justify-center text-purple-400 text-xs font-mono"
-										>
-											-65%
-										</div>
-									</div>
-									<div
-										class="aspect-video bg-linear-to-br from-yellow-400/20 to-orange-600/20 rounded border border-white/5 relative"
-									>
-										<div
-											class="absolute inset-0 flex items-center justify-center text-yellow-400 text-xs font-mono"
-										>
-											-92%
-										</div>
-									</div>
-									<div
-										class="aspect-video bg-linear-to-br from-blue-400/20 to-cyan-600/20 rounded border border-white/5 relative"
-									>
-										<div
-											class="absolute inset-0 flex items-center justify-center text-blue-400 text-xs font-mono"
-										>
-											-45%
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Screen Reflection/Gloss -->
-				<div
-					class="absolute top-0 right-0 w-2/3 h-full bg-linear-to-l from-white/5 to-transparent skew-x-12 pointer-events-none"
-				></div>
-
-				<!-- Keyboard Base (Bottom perspective) -->
-				<div
-					class="relative -mt-1 mx-[2%] h-4 bg-[#252535] rounded-b-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-t border-white/5 flex justify-center"
-				>
-					<!-- Trackpad notch -->
-					<div
-						class="w-1/3 h-full border-x border-white/5 bg-[#2a2a3d]"
-					></div>
-				</div>
-			</div>
-
-			<!-- Decorative Background Glow behind laptop -->
-			<div
-				class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-violet-600/20 blur-[100px] -z-10 rounded-full pointer-events-none"
-			></div>
+		<!-- Stat 2 -->
+		<div class="stat stat-center">
+			<span class="stat-label">Commits Synced</span>
+			<span class="stat-value stat-value-lg">Real-time</span>
+			<span class="stat-sub">Total Sync Volume</span>
 		</div>
+
+		<div class="stat-divider" aria-hidden="true"></div>
+
+		<!-- Stat 3 -->
+		<div class="stat">
+			<span class="stat-label">System Reliability</span>
+			<span class="stat-value">99%</span>
+			<span class="stat-sub">Uptime you can rely on</span>
+		</div>
+	</div>
 </section>
+
+<style>
+	.metrics {
+		position: relative;
+		z-index: 10;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		padding: 0 24px 80px;
+	}
+
+	.metrics-card {
+		display: flex;
+		align-items: stretch;
+		width: 100%;
+		max-width: 840px;
+		background: rgba(255, 255, 255, 0.03);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 28px;
+		backdrop-filter: blur(20px);
+		overflow: hidden;
+		box-shadow: 0 0 60px rgba(91, 80, 232, 0.06), inset 0 1px 0 rgba(255,255,255,0.06);
+	}
+
+	.stat {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 36px 20px;
+		gap: 6px;
+	}
+
+	.stat-divider {
+		width: 1px;
+		background: rgba(255, 255, 255, 0.08);
+		margin: 24px 0;
+		align-self: stretch;
+	}
+
+	.stat-label {
+		font-family: 'Inter', sans-serif;
+		font-size: 13px;
+		font-weight: 400;
+		color: rgba(255, 255, 255, 0.45);
+		letter-spacing: 0.2px;
+		text-align: center;
+	}
+
+	.stat-value {
+		font-family: 'Bricolage Grotesque', sans-serif;
+		font-size: 42px;
+		font-weight: 700;
+		color: #ffffff;
+		line-height: 1.1;
+		letter-spacing: -1.5px;
+		text-align: center;
+	}
+
+	.stat-value-lg {
+		font-size: 36px;
+		letter-spacing: -1px;
+	}
+
+	.stat-sub {
+		font-family: 'Inter', sans-serif;
+		font-size: 11.5px;
+		font-weight: 400;
+		color: rgba(255, 255, 255, 0.30);
+		text-align: center;
+		letter-spacing: 0.1px;
+	}
+</style>

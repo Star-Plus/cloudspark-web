@@ -1,35 +1,13 @@
 <script>
-    import Compatibility from "$lib/sections/Compatibility.svelte";
-import Hero from "$lib/sections/Hero.svelte";
-    import Metrics from "$lib/sections/Metrics.svelte";
-    import Quote from "$lib/sections/Quote.svelte";
-    import Testimonials from "$lib/sections/Testimonials.svelte";
-
+	import Hero from "$lib/sections/Hero.svelte";
 </script>
+
 <svelte:head>
-	<title>CloudSpark - Version Control System for Digital Artists</title>
+	<title>CloudSpark — Version Control for Digital Artists</title>
 	<meta
 		name="description"
-		content="Optimize your digital art with CloudSpark"
+		content="CloudSpark is a native Windows app that gives digital artists professional version control for any file type — images, video, audio, 3D assets."
 	/>
 </svelte:head>
 
-<div class="flex flex-col gap-20">
-	<Hero />
-	
-	<Metrics />
-	
-	<Compatibility />
-	
-	<Quote />
-	
-	<Testimonials />
-</div>
-
-
-
-<!-- Bottom decorative blur -->
-<div
-	class="fixed bottom-0 left-0 w-full h-24 bg-linear-to-t from-[#050520] to-transparent pointer-events-none z-50"
-></div>
-
+<Hero />

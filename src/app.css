@@ -1,19 +1,35 @@
 @import "tailwindcss";
 
 @theme {
+    /* StarPlus palette */
+    --color-background: #0B0B0F;
+    --color-surface: #13131A;
 
-    --color-primary: #6952f7;
-    --color-secondary: #8838FF;
-    --color-accent: #F7528D;
+    --color-primary:   #6D28D9;
+    --color-secondary: #A78BFA;
+    --color-tertiary:  #C4B5FD;
 
-    --color-background: #070707;
-    --color-txt-main: #FCFCFC;
-    --color-txt-muted: #C0C0C0;
+    --color-accent-pink: #F472B6;
+    --color-accent-blue: #60A5FA;
 
-    --color-border: #4F4F4F;
+    --color-txt-main:  #FFFFFF;
+    --color-txt-muted: rgba(255,255,255,0.42);
+    --color-border:    rgba(255,255,255,0.08);
 
-    --color-success: #0BD900;
-    --color-error: #E9001F;
+    /* Fonts */
+    --font-display: 'Bricolage Grotesque', sans-serif;
+    --font-sans: 'Inter', sans-serif;
+}
 
-    --font-primary: 'primary', sans-serif;
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #0B0B0F;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 }
