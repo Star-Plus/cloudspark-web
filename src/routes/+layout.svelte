@@ -1,119 +1,8 @@
 <script>
-	import { onMount } from "svelte";
-	import Header from "./Header.svelte";
 	import "../app.css";
-	import "./layout.css";
 
 	/** @type {{children: import('svelte').Snippet}} */
 	let { children } = $props();
-
-	let canvas;
-
-	onMount(() => {
-		if (!canvas) return; // Guard in case of fast unmounts
-
-		const ctx = canvas.getContext("2d");
-		let animationFrameId;
-		let stars = [];
-		const connectionDistance = 150; // Increased for better connectivity
-		const starCount = 80;
-
-		const resize = () => {
-			if (canvas) {
-				canvas.width = window.innerWidth;
-				canvas.height = window.innerHeight;
-			}
-		};
-
-		class Star {
-			constructor() {
-				this.x = Math.random() * window.innerWidth;
-				this.y = Math.random() * window.innerHeight;
-				this.vx = (Math.random() - 0.5) * 0.3; // Slower, smoother drift
-				this.vy = (Math.random() - 0.5) * 0.3;
-				this.size = Math.random() * 2 + 1;
-				this.baseAlpha = Math.random() * 0.6 + 0.2;
-				this.alpha = this.baseAlpha;
-				this.twinkleSpeed = Math.random() * 0.02 + 0.005;
-				this.twinkleDir = 1;
-			}
-
-			update() {
-				this.x += this.vx;
-				this.y += this.vy;
-
-				// Bounce off edges
-				if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-				if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-
-				// Twinkle
-				this.alpha += this.twinkleSpeed * this.twinkleDir;
-				if (this.alpha > 0.8 || this.alpha < 0.2) this.twinkleDir *= -1;
-			}
-
-			draw() {
-				ctx.globalAlpha = this.alpha;
-				ctx.fillStyle = "white";
-				ctx.beginPath();
-				ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-				ctx.fill();
-			}
-		}
-
-		const init = () => {
-			stars = [];
-			resize();
-			for (let i = 0; i < starCount; i++) {
-				stars.push(new Star());
-			}
-		};
-
-		const animate = () => {
-			if (!ctx) return;
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-			// Update and draw stars
-			stars.forEach((star) => {
-				star.update();
-				star.draw();
-			});
-
-			// Draw connections
-			ctx.globalAlpha = 1;
-			// Use a very light white/purple connection line
-			ctx.lineWidth = 0.5;
-
-			for (let i = 0; i < stars.length; i++) {
-				for (let j = i + 1; j < stars.length; j++) {
-					const dx = stars[i].x - stars[j].x;
-					const dy = stars[i].y - stars[j].y;
-					const dist = Math.sqrt(dx * dx + dy * dy);
-
-					if (dist < connectionDistance) {
-						// Opacity based on distance (closer = more opaque)
-						const opacity = 1 - dist / connectionDistance;
-						ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.15})`;
-
-						ctx.beginPath();
-						ctx.moveTo(stars[i].x, stars[i].y);
-						ctx.lineTo(stars[j].x, stars[j].y);
-						ctx.stroke();
-					}
-				}
-			}
-
-			animationFrameId = requestAnimationFrame(animate);
-		};
-
-		window.addEventListener("resize", resize);
-		init();
-		animate();
-
-		return () => {
-			window.removeEventListener("resize", resize);
-			cancelAnimationFrame(animationFrameId);
-		};
-	});
 </script>
 
 <div
@@ -133,7 +22,7 @@
 		></div>
 
 		<!-- Constellation Canvas -->
-		<canvas bind:this={canvas} class="absolute inset-0 w-full h-full"
+		<canvas class="absolute inset-0 w-full h-full"
 		></canvas>
 
 		<!-- Drifting Shapes -->
@@ -144,13 +33,12 @@
 			class="absolute bottom-[25%] left-[5%] w-12 h-12 border border-blue-500/10 rounded-full animate-[spin_30s_linear_infinite]"
 		></div>
 		<div
-			class="absolute top-[60%] right-[10%] w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[20px] border-b-white/10 rotate-12 animate-pulse"
+			class="absolute top-[60%] right-[10%] w-0 h-0 border-l-10 border-l-transparent border-r-10 border-r-transparent border-b-20 border-b-white/10 rotate-12 animate-pulse"
 		></div>
 	</div>
 
 	<!-- Main Content Wrapper -->
 	<div class="relative z-10 flex flex-col min-h-screen">
-		<Header />
 
 		<main
 			class="flex-1 w-full max-w-7xl mx-auto p-4 box-border flex flex-col relative"
