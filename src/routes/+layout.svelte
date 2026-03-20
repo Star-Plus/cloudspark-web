@@ -19,7 +19,7 @@
 	</main>
 
 	<!-- Footer -->
-	<footer class="footer">
+	<footer class="footer bg-background">
 		<div class="footer-inner">
 			<div class="footer-brand">
 				<img src="Logo.png" alt="CloudSpark" class="footer-logo" />
@@ -27,11 +27,11 @@
 			</div>
 			<nav class="footer-nav" aria-label="Footer navigation">
 				<a href="https://github.com/Star-Plus/CloudSpark-Desktop/releases/latest" target="_blank" rel="noopener noreferrer">Download</a>
-				<a href="https://github.com/Star-Plus/CloudSpark-Desktop" target="_blank" rel="noopener noreferrer">GitHub</a>
+				<a href="https://github.com/Star-Plus" target="_blank" rel="noopener noreferrer">GitHub</a>
 				<a href="/privacy">Privacy</a>
 				<a href="/terms">Terms</a>
 			</nav>
-			<p class="footer-copy">© 2025 CloudSpark. All rights reserved.</p>
+			<p class="footer-copy">© 2026 CloudSpark. All rights reserved.</p>
 		</div>
 	</footer>
 </div>

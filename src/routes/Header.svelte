@@ -1,20 +1,33 @@
 <script>
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import AuthService from '$lib/features/auth/AuthService';
 
 	const authService = AuthService.getInstance();
 	let isLoggedIn = false;
 	let googleInitialized = false;
+	let isScrolled = false;
+	/** @type {HTMLScriptElement | null} */
+	let googleScript;
 
 	onMount(() => {
 		isLoggedIn = authService.isAuthenticated();
 
-		const script = document.createElement('script');
-		script.src = 'https://accounts.google.com/gsi/client';
-		script.async = true;
-		script.defer = true;
-		script.onload = initializeGoogleSignIn;
-		document.head.appendChild(script);
+		googleScript = document.createElement('script');
+		googleScript.src = 'https://accounts.google.com/gsi/client';
+		googleScript.async = true;
+		googleScript.defer = true;
+		googleScript.onload = initializeGoogleSignIn;
+		document.head.appendChild(googleScript);
+
+		handleOnScroll();
+		window.addEventListener('scroll', handleOnScroll, { passive: true });
+	});
+
+	onDestroy(() => {
+		window.removeEventListener('scroll', handleOnScroll);
+		if (googleScript?.parentNode) {
+			googleScript.parentNode.removeChild(googleScript);
+		}
 	});
 
 	function initializeGoogleSignIn() {
@@ -56,16 +69,13 @@
 		}
 	}
 
-	const navLinks = [
-		{ label: 'About', href: '/about' },
-		{ label: 'Blog', href: '/blog' },
-		{ label: 'Contact Us', href: '/contact' },
-		{ label: 'Privacy Policy', href: '/privacy' },
-		{ label: 'Terms of Use', href: '/terms' }
-	];
+	function handleOnScroll(){
+		isScrolled = window.scrollY > 100;
+	}
+
 </script>
 
-<header class="header-root">
+<header class="header-root py-6 px-10 lg:px-96" class:scrolled={isScrolled}>
 	<div class="logo-area">
 		<img src="Logo.png" alt="CloudSpark" class="logo-img" />
 		<span class="logo-text">CloudSpark</span>
@@ -73,11 +83,9 @@
 
 	<div class="header-actions">
 		{#if isLoggedIn}
-			<button class="avatar-btn" title="Profile">
-				<svg viewBox="0 0 24 24" fill="currentColor" class="avatar-icon">
-					<path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-				</svg>
-			</button>
+			<svg viewBox="0 0 24 24" fill="currentColor" class="avatar-icon">
+				<path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+			</svg>
 		{:else}
 			<button onclick={handleLoginClick} class="signup-btn">
 				Signup
@@ -91,11 +99,10 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 20px 40px;
 		width: 100%;
-		max-width: 1200px;
 		margin: 0 auto;
 		box-sizing: border-box;
+		transition: background 0.2s ease, backdrop-filter 0.2s ease;
 	}
 
 	.logo-area {
@@ -144,26 +151,13 @@
 		transform: translateY(-1px);
 	}
 
-	.avatar-btn {
-		width: 36px;
-		height: 36px;
-		border-radius: 50%;
-		background: rgba(255, 255, 255, 0.1);
-		border: 1px solid rgba(255, 255, 255, 0.15);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		cursor: pointer;
-		transition: background 0.2s;
-		color: white;
-	}
-
-	.avatar-btn:hover {
-		background: rgba(255, 255, 255, 0.18);
-	}
-
 	.avatar-icon {
 		width: 18px;
 		height: 18px;
+	}
+
+	.scrolled {
+		background: rgba(12, 12, 12, 0.6);
+		backdrop-filter: blur(10px);
 	}
 </style>
