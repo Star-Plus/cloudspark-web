@@ -2,12 +2,12 @@
 	<div class="dl-glow" aria-hidden="true"></div>
 
 	<div class="dl-content">
-		<div class="section-label">Get Started</div>
-		<h2 class="dl-title">
+		<div class="section-label animate-in">Get Started</div>
+		<h2 class="dl-title animate-in delay-1">
 			Download CloudSpark<br />
 			<span class="dl-accent">and take control.</span>
 		</h2>
-		<p class="dl-sub">
+		<p class="dl-sub animate-in delay-2">
 			One installer. No dependencies. No configuration.
 			Just run it and start tracking your creative work.
 		</p>
@@ -16,7 +16,7 @@
 			href="https://github.com/Star-Plus/CloudSpark-Desktop/releases/latest"
 			target="_blank"
 			rel="noopener noreferrer"
-			class="dl-btn"
+			class="dl-btn animate-in delay-3"
 		>
 			<svg viewBox="0 0 24 24" fill="currentColor" class="win-ico" aria-hidden="true">
 				<path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.8"/>
@@ -30,7 +30,7 @@
 			</svg>
 		</a>
 
-		<div class="dl-requirements">
+		<div class="dl-requirements animate-in delay-4">
 			<div class="req">
 				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="req-check"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
 				Windows 10+ (64-bit)

@@ -7,20 +7,20 @@
 	<div class="showcase-overlay" aria-hidden="true"></div>
 
 	<div class="showcase-content">
-		<div class="showcase-badge">✨ Built for Creators</div>
+		<div class="showcase-badge animate-in">✨ Built for Creators</div>
 
-		<h2 class="showcase-title">
+		<h2 class="showcase-title animate-in delay-1">
 			Where imagination<br />
 			meets version control.
 		</h2>
 
-		<p class="showcase-sub">
+		<p class="showcase-sub animate-in delay-2">
 			Whether you're a solo illustrator, a motion designer, or a full studio team —
 			CloudSpark gives you the peace of mind that every version of your work is safe,
 			searchable, and always one click away.
 		</p>
 
-		<div class="stats-row">
+		<div class="stats-row animate-in delay-3">
 			<div class="stat">
 				<span class="stat-num">∞</span>
 				<span class="stat-label">File types supported</span>

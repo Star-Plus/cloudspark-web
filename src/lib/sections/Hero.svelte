@@ -142,17 +142,17 @@
 	<div class="hero-overlay" aria-hidden="true"></div>
 
 	<div class="hero-content">
-		<div class="badge">
+		<div class="badge animate-in">
 			<span class="badge-dot"></span>
 			Version Control · Built for Creatives
 		</div>
 
-		<h1 class="headline">
+		<h1 class="headline animate-in delay-1">
 			Your creative work,<br />
 			<span class="headline-grad">finally under control.</span>
 		</h1>
 
-		<p class="sub">
+		<p class="sub animate-in delay-2">
 			CloudSpark tracks every change in your digital art projects —
 			images, video, audio, 3D — with the precision of git,
 			without any of the complexity.
@@ -162,7 +162,7 @@
 			href="https://github.com/Star-Plus/CloudSpark-Desktop/releases/latest"
 			target="_blank"
 			rel="noopener noreferrer"
-			class="btn-dl"
+			class="btn-dl animate-in delay-3"
 		>
 			<svg viewBox="0 0 24 24" fill="currentColor" class="win-ico" aria-hidden="true">
 				<path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.8"/>
@@ -171,8 +171,6 @@
 			<div class="btn-meta">Free · v0.1.0</div>
 		</a>
 	</div>
-
-	<div class="scroll-cue" aria-hidden="true"><div class="scroll-bar"></div></div>
 </section>
 
 <style>
