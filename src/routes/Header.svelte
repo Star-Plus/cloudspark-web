@@ -70,7 +70,7 @@
 	}
 
 	function handleOnScroll(){
-		isScrolled = window.scrollY > 100;
+		isScrolled = window.scrollY > 300;
 	}
 
 </script>
