@@ -6,7 +6,7 @@
 			workflow needs.
 		</h2>
 
-		<div class="grid">
+		<div class="features-grid">
 			<div class="card card-wide animate-in delay-2">
 				<div class="card-icon">
 					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" /></svg>
@@ -61,20 +61,21 @@
 <style>
 .features-section {
 	width: 100vw;
-	height: 100vh;
-	min-height: 700px;
+	height: auto;
+	min-height: 100dvh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	background: #0B0B0F;
 	position: relative;
 	overflow: hidden;
+	padding: 80px 0;
 }
 
 .features-inner {
 	max-width: 1000px;
 	width: 100%;
-	padding: 0 32px;
+	padding: 0 24px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -82,7 +83,7 @@
 
 .section-label {
 	font-family: 'Inter', sans-serif;
-	font-size: 11.5px;
+	font-size: 11px;
 	font-weight: 500;
 	letter-spacing: 1.5px;
 	text-transform: uppercase;
@@ -92,27 +93,83 @@
 
 .section-title {
 	font-family: 'Bricolage Grotesque', sans-serif;
-	font-size: clamp(30px, 4vw, 48px);
+	font-size: clamp(28px, 6vw, 48px);
 	font-weight: 700;
-	line-height: 1.12;
-	letter-spacing: -1.5px;
+	line-height: 1.15;
+	letter-spacing: -1px;
 	color: #fff;
 	text-align: center;
-	margin: 0 0 48px 0;
+	margin: 0 0 40px 0;
 }
 
-.grid {
+@media (max-width: 768px) {
+	.section-title br {
+		display: none;
+	}
+	.section-title {
+		margin: 0 0 24px 0;
+	}
+}
+
+.features-grid {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	gap: 16px;
 	width: 100%;
 }
 
+@media (max-width: 900px) {
+	.features-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 768px) {
+	.features-section {
+		padding: 40px 0;
+	}
+	.features-grid {
+		grid-template-columns: 1fr;
+		gap: 10px;
+	}
+	.card-wide {
+		grid-column: span 1 !important;
+	}
+	
+	/* Compact horizontal layout for mobile to save vertical space */
+	.card {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		grid-template-rows: auto auto;
+		column-gap: 14px;
+		row-gap: 2px;
+		padding: 14px 16px;
+	}
+	.card-icon {
+		grid-column: 1;
+		grid-row: 1 / span 2;
+		margin-bottom: 0;
+		width: 32px;
+		height: 32px;
+	}
+	.card h3 {
+		grid-column: 2;
+		grid-row: 1;
+		margin-bottom: 2px;
+		font-size: 15px;
+	}
+	.card p {
+		grid-column: 2;
+		grid-row: 2;
+		font-size: 12px;
+	}
+}
+
 .card {
 	background: rgba(255,255,255,0.03);
 	border: 1px solid rgba(255,255,255,0.06);
 	border-radius: 16px;
-	padding: 28px 24px;
+	padding: 24px;
 	transition: border-color 0.3s, background 0.3s;
 }
 
@@ -126,37 +183,37 @@
 }
 
 .card-icon {
-	width: 40px;
-	height: 40px;
-	border-radius: 12px;
+	width: 38px;
+	height: 38px;
+	border-radius: 10px;
 	background: rgba(109,40,217,0.12);
 	border: 1px solid rgba(167,139,250,0.15);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin-bottom: 18px;
+	margin-bottom: 16px;
 	color: #A78BFA;
 }
 
 .card-icon svg {
-	width: 20px;
-	height: 20px;
+	width: 18px;
+	height: 18px;
 }
 
 .card h3 {
 	font-family: 'Bricolage Grotesque', sans-serif;
-	font-size: 17px;
+	font-size: 16px;
 	font-weight: 700;
 	color: #fff;
 	margin: 0 0 8px 0;
-	letter-spacing: -0.3px;
+	letter-spacing: -0.2px;
 }
 
 .card p {
 	font-family: 'Inter', sans-serif;
-	font-size: 13.5px;
+	font-size: 13px;
 	color: rgba(255,255,255,0.40);
-	line-height: 1.65;
+	line-height: 1.6;
 	margin: 0;
 }
 </style>

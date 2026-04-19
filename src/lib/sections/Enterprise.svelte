@@ -77,14 +77,15 @@
 <style>
 .enterprise {
 	width: 100vw;
-	height: 100vh;
-	min-height: 700px;
+	height: auto;
+	min-height: 100dvh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	background: #0B0B0F;
 	position: relative;
 	overflow: hidden;
+	padding: 80px 0;
 }
 
 .enterprise::before {
@@ -100,17 +101,32 @@
 .ent-inner {
 	max-width: 1100px;
 	width: 100%;
-	padding: 0 40px;
+	padding: 0 24px;
 	display: flex;
 	align-items: center;
-	gap: 72px;
+	gap: 60px;
+}
+
+@media (max-width: 900px) {
+	.ent-inner {
+		flex-direction: column;
+		text-align: center;
+		gap: 64px;
+	}
+	.ent-sub {
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.benefit {
+		text-align: left;
+	}
 }
 
 .ent-left { flex: 1; }
 
 .section-label {
 	font-family: 'Inter', sans-serif;
-	font-size: 11.5px;
+	font-size: 11px;
 	font-weight: 500;
 	letter-spacing: 1.5px;
 	text-transform: uppercase;
@@ -120,18 +136,24 @@
 
 .ent-title {
 	font-family: 'Bricolage Grotesque', sans-serif;
-	font-size: clamp(32px, 4vw, 50px);
+	font-size: clamp(28px, 6vw, 50px);
 	font-weight: 700;
-	line-height: 1.12;
-	letter-spacing: -1.5px;
+	line-height: 1.15;
+	letter-spacing: -1px;
 	color: #fff;
 	margin: 0 0 18px 0;
 }
 
+@media (max-width: 768px) {
+	.ent-title br {
+		display: none;
+	}
+}
+
 .ent-sub {
 	font-family: 'Inter', sans-serif;
-	font-size: 14.5px;
-	line-height: 1.72;
+	font-size: 14px;
+	line-height: 1.7;
 	color: rgba(255,255,255,0.42);
 	margin: 0 0 32px 0;
 	max-width: 440px;
@@ -185,6 +207,12 @@
 	flex: 0 0 300px;
 	display: flex;
 	justify-content: center;
+}
+
+@media (max-width: 480px) {
+	.ent-right {
+		transform: scale(0.85);
+	}
 }
 
 .org-visual {

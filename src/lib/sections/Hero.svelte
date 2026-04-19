@@ -20,7 +20,10 @@
 	onMount(() => {
 		const ctx = canvas.getContext('2d');
 
+		let time = 0;
+
 		const resize = () => {
+			if (!canvas) return;
 			W = canvas.width = canvas.offsetWidth * (window.devicePixelRatio > 1 ? 1.5 : 1);
 			H = canvas.height = canvas.offsetHeight * (window.devicePixelRatio > 1 ? 1.5 : 1);
 			canvas.style.width = canvas.offsetWidth + 'px';
@@ -34,9 +37,12 @@
 			mouse.y = e.clientY / window.innerHeight;
 		});
 
-		let time = 0;
-
+		/** 
+		 * @param {any} ribbon 
+		 * @param {number} t 
+		 */
 		function drawRibbon(ribbon, t) {
+			if (!ctx) return;
 			const steps = 120;
 			const mouseOffsetX = (mouse.x - 0.5) * 40;
 			const mouseOffsetY = (mouse.y - 0.5) * 25;
@@ -102,7 +108,9 @@
 			ctx.stroke();
 		}
 
+		/** @param {number} [timestamp] */
 		function draw(timestamp) {
+			if (!ctx) return;
 			time = timestamp || 0;
 			ctx.clearRect(0, 0, W, H);
 
@@ -215,7 +223,16 @@
 	align-items: center;
 	text-align: center;
 	max-width: 640px;
-	padding: 0 28px;
+	padding: 0 24px;
+}
+
+@media (max-width: 768px) {
+	.hero {
+		padding-top: 80px; /* Account for fixed header if needed, but it's flex centered */
+	}
+	.hero-content {
+		max-width: 100%;
+	}
 }
 
 .badge {
@@ -223,16 +240,23 @@
 	align-items: center;
 	gap: 8px;
 	font-family: 'Inter', sans-serif;
-	font-size: 11.5px;
+	font-size: 11px;
 	font-weight: 500;
 	letter-spacing: 0.6px;
 	color: rgba(167,139,250,0.85);
 	background: rgba(109,40,217,0.10);
 	border: 1px solid rgba(167,139,250,0.18);
-	padding: 5px 15px;
+	padding: 5px 14px;
 	border-radius: 999px;
 	backdrop-filter: blur(12px);
-	margin-bottom: 26px;
+	margin-bottom: 24px;
+}
+
+@media (max-width: 480px) {
+	.badge {
+		font-size: 10px;
+		padding: 4px 12px;
+	}
 }
 
 .badge-dot {
@@ -250,13 +274,19 @@
 
 .headline {
 	font-family: 'Bricolage Grotesque', sans-serif;
-	font-size: clamp(38px, 5.2vw, 68px);
+	font-size: clamp(34px, 8vw, 68px);
 	font-weight: 800;
 	line-height: 1.08;
-	letter-spacing: -2px;
+	letter-spacing: -1.5px;
 	color: #fff;
 	margin: 0 0 20px 0;
 	text-shadow: 0 0 80px rgba(109,40,217,0.30);
+}
+
+@media (max-width: 768px) {
+	.headline {
+		letter-spacing: -1px;
+	}
 }
 
 .headline-grad {
@@ -275,12 +305,19 @@
 
 .sub {
 	font-family: 'Inter', sans-serif;
-	font-size: 15.5px;
-	line-height: 1.72;
+	font-size: 15px;
+	line-height: 1.65;
 	color: rgba(255,255,255,0.46);
 	margin: 0 0 34px 0;
 	max-width: 490px;
 	text-shadow: 0 2px 16px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 480px) {
+	.sub {
+		font-size: 14px;
+		line-height: 1.55;
+	}
 }
 
 .btn-dl {

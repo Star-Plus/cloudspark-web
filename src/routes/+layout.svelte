@@ -34,6 +34,10 @@
 		z-index: 100;
 		display: flex;
 		justify-content: center;
+		background: rgba(11, 11, 15, 0.6);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 	}
 
 	main {

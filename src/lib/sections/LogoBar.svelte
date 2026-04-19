@@ -50,15 +50,16 @@
 		position: relative;
 		z-index: 10;
 		width: 100%;
-		padding: 0 0 32px 0;
+		padding: 0 20px 32px 20px;
 		display: flex;
 		justify-content: center;
+		box-sizing: border-box;
 	}
 
 	.logobar-inner {
 		display: flex;
 		align-items: center;
-		gap: 10px;
+		gap: 12px;
 		flex-wrap: wrap;
 		justify-content: center;
 	}
@@ -68,11 +69,11 @@
 		align-items: center;
 		gap: 8px;
 		font-family: 'Inter', sans-serif;
-		font-size: 14.5px;
+		font-size: 13px;
 		font-weight: 600;
 		color: rgba(255, 255, 255, 0.55);
 		letter-spacing: 0.1px;
-		padding: 0 10px;
+		padding: 4px 8px;
 		transition: color 0.2s;
 	}
 
@@ -81,15 +82,21 @@
 	}
 
 	.logo-icon {
-		width: 20px;
-		height: 20px;
+		width: 18px;
+		height: 18px;
 		flex-shrink: 0;
 		color: inherit;
 	}
 
 	.logo-sep {
 		color: rgba(255, 255, 255, 0.2);
-		font-size: 18px;
+		font-size: 16px;
 		user-select: none;
+	}
+
+	@media (max-width: 480px) {
+		.logo-sep {
+			display: none;
+		}
 	}
 </style>
