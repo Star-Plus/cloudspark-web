@@ -64,7 +64,7 @@
 </script>
 
 <svelte:head>
-	<title>Lab Verification — CloudSpark Quality Assurance</title>
+	<title>Lab Verification — Euler Quality Assurance</title>
 	<meta name="robots" content="noindex, nofollow" />
 </svelte:head>
 

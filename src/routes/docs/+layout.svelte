@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>Documentation — CloudSpark</title>
+	<title>Documentation — Euler</title>
 </svelte:head>
 
 <div class="docs-container animate-in">
@@ -61,7 +61,7 @@
 	font-family: 'Inter', sans-serif;
 	font-size: 13px;
 	font-weight: 700;
-	color: #fff;
+	color: var(--text-950);
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	margin: 0 0 16px 0;
@@ -77,13 +77,13 @@
 .sidebar-nav a {
 	font-family: 'Inter', sans-serif;
 	font-size: 14.5px;
-	color: rgba(255,255,255,0.5);
+	color: var(--text-600);
 	text-decoration: none;
 	transition: color 0.2s;
 }
 
 .sidebar-nav a:hover, .sidebar-nav a.active {
-	color: #A78BFA;
+	color: var(--primary-500);
 }
 
 :global(.animate-in) {

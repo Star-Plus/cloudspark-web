@@ -4,141 +4,103 @@
 	/** @type {HTMLCanvasElement} */
 	let canvas;
 	let animId = 0;
-	let mouse = { x: 0.5, y: 0.5 };
 	let W = 0, H = 0;
+	let mouseX = 0.5, mouseY = 0.5;
+	let targetX = 0.5, targetY = 0.5;
 
-	// ── Aurora ribbon config ──
 	const RIBBONS = [
-		{ hue: [270, 300], yBase: 0.35, amplitude: 80, width: 220, speed: 0.0004, alpha: 0.13 },
-		{ hue: [280, 320], yBase: 0.45, amplitude: 100, width: 280, speed: 0.0003, alpha: 0.10 },
-		{ hue: [220, 260], yBase: 0.55, amplitude: 70, width: 200, speed: 0.0005, alpha: 0.12 },
-		{ hue: [310, 340], yBase: 0.62, amplitude: 90, width: 240, speed: 0.00035, alpha: 0.09 },
-		{ hue: [250, 290], yBase: 0.30, amplitude: 60, width: 180, speed: 0.00045, alpha: 0.10 },
-		{ hue: [200, 240], yBase: 0.70, amplitude: 75, width: 200, speed: 0.0003, alpha: 0.08 },
+		{ hue: [265, 295], yBase: 0.30, amplitude: 75, width: 230, speed: 0.00022, alpha: 0.16 },
+		{ hue: [275, 310], yBase: 0.52, amplitude: 90, width: 260, speed: 0.00016, alpha: 0.14 },
+		{ hue: [155, 172], yBase: 0.65, amplitude: 65, width: 200, speed: 0.00026, alpha: 0.13 },
+		{ hue: [245, 275], yBase: 0.20, amplitude: 55, width: 180, speed: 0.00019, alpha: 0.11 },
 	];
 
 	onMount(() => {
-		const ctx = canvas.getContext('2d');
-
-		let time = 0;
+		const ctx = canvas.getContext('2d', { alpha: true });
+		if (!ctx) return;
 
 		const resize = () => {
 			if (!canvas) return;
-			W = canvas.width = canvas.offsetWidth * (window.devicePixelRatio > 1 ? 1.5 : 1);
-			H = canvas.height = canvas.offsetHeight * (window.devicePixelRatio > 1 ? 1.5 : 1);
-			canvas.style.width = canvas.offsetWidth + 'px';
-			canvas.style.height = canvas.offsetHeight + 'px';
+			W = canvas.width  = canvas.offsetWidth;
+			H = canvas.height = canvas.offsetHeight;
 		};
 		resize();
 		window.addEventListener('resize', resize);
 
-		window.addEventListener('mousemove', (e) => {
-			mouse.x = e.clientX / window.innerWidth;
-			mouse.y = e.clientY / window.innerHeight;
-		});
+		const onMove = (/** @type {MouseEvent} */ e) => {
+			targetX = e.clientX / window.innerWidth;
+			targetY = e.clientY / window.innerHeight;
+		};
+		window.addEventListener('mousemove', onMove, { passive: true });
 
-		/** 
-		 * @param {any} ribbon 
-		 * @param {number} t 
+		let skip = 0;
+
+		/**
+		 * @param {any} r
+		 * @param {number} t
 		 */
-		function drawRibbon(ribbon, t) {
-			if (!ctx) return;
-			const steps = 120;
-			const mouseOffsetX = (mouse.x - 0.5) * 40;
-			const mouseOffsetY = (mouse.y - 0.5) * 25;
+		function drawRibbon(r, t) {
+			const steps = 60;
+			const ox = (mouseX - 0.5) * 28;
+			const oy = (mouseY - 0.5) * 16;
+			const hw = r.width / 2;
 
-			// Build the ribbon path points
-			const points = [];
+			const xs = new Float32Array(steps + 1);
+			const ys = new Float32Array(steps + 1);
 			for (let i = 0; i <= steps; i++) {
-				const frac = i / steps;
-				const x = frac * W;
-
-				// Multiple sine waves layered for organic movement
-				const wave1 = Math.sin(frac * Math.PI * 2.2 + t * ribbon.speed * 1.0) * ribbon.amplitude;
-				const wave2 = Math.sin(frac * Math.PI * 3.8 + t * ribbon.speed * 0.7 + 1.5) * (ribbon.amplitude * 0.4);
-				const wave3 = Math.sin(frac * Math.PI * 1.2 + t * ribbon.speed * 0.4 + 3) * (ribbon.amplitude * 0.25);
-				const mouseWave = Math.sin(frac * Math.PI * 2 + t * 0.0004) * mouseOffsetY;
-
-				const y = ribbon.yBase * H + wave1 + wave2 + wave3 + mouseWave + mouseOffsetX * Math.sin(frac * Math.PI);
-
-				points.push({ x, y });
+				const f = i / steps;
+				xs[i] = f * W;
+				ys[i] = r.yBase * H
+					+ Math.sin(f * 6.9  + t * r.speed)        * r.amplitude
+					+ Math.sin(f * 11.9 + t * r.speed * 0.7 + 1.5) * r.amplitude * 0.3
+					+ oy * Math.sin(f * Math.PI)
+					+ ox * 0.25;
 			}
 
-			// Draw ribbon as a filled shape with gradient
-			const grad = ctx.createLinearGradient(0, 0, W, 0);
-			const h1 = ribbon.hue[0] + Math.sin(t * 0.0003) * 15;
-			const h2 = ribbon.hue[1] + Math.cos(t * 0.0004) * 15;
-			grad.addColorStop(0, `hsla(${h1}, 80%, 65%, 0)`);
-			grad.addColorStop(0.2, `hsla(${h1}, 80%, 65%, ${ribbon.alpha})`);
-			grad.addColorStop(0.5, `hsla(${(h1+h2)/2}, 85%, 70%, ${ribbon.alpha * 1.2})`);
-			grad.addColorStop(0.8, `hsla(${h2}, 80%, 65%, ${ribbon.alpha})`);
-			grad.addColorStop(1, `hsla(${h2}, 80%, 65%, 0)`);
+			const h1 = r.hue[0] + Math.sin(t * 0.00016) * 8;
+			const h2 = r.hue[1] + Math.cos(t * 0.00020) * 8;
+			const g  = ctx.createLinearGradient(0, 0, W, 0);
+			g.addColorStop(0,   `hsla(${h1},60%,60%,0)`);
+			g.addColorStop(0.2, `hsla(${h1},62%,62%,${r.alpha})`);
+			g.addColorStop(0.5, `hsla(${(h1+h2)/2},65%,65%,${r.alpha*1.1})`);
+			g.addColorStop(0.8, `hsla(${h2},62%,62%,${r.alpha})`);
+			g.addColorStop(1,   `hsla(${h2},60%,60%,0)`);
 
-			// Upper edge
 			ctx.beginPath();
-			ctx.moveTo(points[0].x, points[0].y - ribbon.width / 2);
-			for (let i = 1; i < points.length; i++) {
-				const prev = points[i - 1];
-				const curr = points[i];
-				const cpx = (prev.x + curr.x) / 2;
-				ctx.quadraticCurveTo(prev.x, prev.y - ribbon.width / 2, cpx, (prev.y + curr.y) / 2 - ribbon.width / 2);
+			ctx.moveTo(xs[0], ys[0] - hw);
+			for (let i = 1; i <= steps; i++) {
+				const px = xs[i-1], py = ys[i-1], cx = xs[i], cy = ys[i];
+				ctx.quadraticCurveTo(px, py - hw, (px+cx)/2, (py+cy)/2 - hw);
 			}
-			// Lower edge (reverse)
-			for (let i = points.length - 1; i >= 0; i--) {
-				const curr = points[i];
-				const prev = i > 0 ? points[i - 1] : curr;
-				const cpx = (prev.x + curr.x) / 2;
-				ctx.quadraticCurveTo(curr.x, curr.y + ribbon.width / 2, cpx, (prev.y + curr.y) / 2 + ribbon.width / 2);
+			for (let i = steps; i >= 0; i--) {
+				const cx = xs[i], cy = ys[i];
+				const px = i > 0 ? xs[i-1] : cx, py = i > 0 ? ys[i-1] : cy;
+				ctx.quadraticCurveTo(cx, cy + hw, (px+cx)/2, (py+cy)/2 + hw);
 			}
 			ctx.closePath();
-
-			ctx.fillStyle = grad;
+			ctx.fillStyle = g;
 			ctx.fill();
-
-			// Bright centre line
-			ctx.beginPath();
-			ctx.moveTo(points[0].x, points[0].y);
-			for (let i = 1; i < points.length; i++) {
-				const prev = points[i - 1];
-				const curr = points[i];
-				ctx.quadraticCurveTo(prev.x, prev.y, (prev.x + curr.x) / 2, (prev.y + curr.y) / 2);
-			}
-			ctx.strokeStyle = `hsla(${(h1+h2)/2}, 90%, 80%, ${ribbon.alpha * 0.7})`;
-			ctx.lineWidth = 1.5;
-			ctx.stroke();
 		}
 
-		/** @param {number} [timestamp] */
-		function draw(timestamp) {
-			if (!ctx) return;
-			time = timestamp || 0;
-			ctx.clearRect(0, 0, W, H);
-
-			// Subtle ambient glow spots
-			const glow1 = ctx.createRadialGradient(W * 0.3, H * 0.4, 0, W * 0.3, H * 0.4, W * 0.45);
-			glow1.addColorStop(0, 'rgba(109, 40, 217, 0.08)');
-			glow1.addColorStop(1, 'rgba(109, 40, 217, 0)');
-			ctx.fillStyle = glow1;
-			ctx.fillRect(0, 0, W, H);
-
-			const glow2 = ctx.createRadialGradient(W * 0.7, H * 0.6, 0, W * 0.7, H * 0.6, W * 0.40);
-			glow2.addColorStop(0, 'rgba(96, 165, 250, 0.06)');
-			glow2.addColorStop(1, 'rgba(96, 165, 250, 0)');
-			ctx.fillStyle = glow2;
-			ctx.fillRect(0, 0, W, H);
-
-			// Draw each ribbon with composite blending
-			ctx.globalCompositeOperation = 'lighter';
-			RIBBONS.forEach(r => drawRibbon(r, time));
-			ctx.globalCompositeOperation = 'source-over';
-
+		/** @param {number} ts */
+		function draw(ts) {
 			animId = requestAnimationFrame(draw);
+			skip ^= 1;
+			if (skip) return;
+
+			mouseX += (targetX - mouseX) * 0.05;
+			mouseY += (targetY - mouseY) * 0.05;
+
+			ctx.clearRect(0, 0, W, H);
+			for (const r of RIBBONS) drawRibbon(r, ts);
 		}
-		draw(0);
+
+		animId = requestAnimationFrame(draw);
 
 		return () => {
 			cancelAnimationFrame(animId);
 			window.removeEventListener('resize', resize);
+			window.removeEventListener('mousemove', onMove);
 		};
 	});
 
@@ -161,13 +123,13 @@
 		</h1>
 
 		<p class="sub animate-in delay-2">
-			CloudSpark tracks every change in your digital art projects —
+			Euler tracks every change in your digital art projects —
 			images, video, audio, 3D — with the precision of git,
 			without any of the complexity.
 		</p>
 
 		<a
-			href="https://github.com/Star-Plus/CloudSpark-Desktop/releases/latest"
+			href="https://github.com/Star-Plus/Euler-Desktop/releases/latest"
 			target="_blank"
 			rel="noopener noreferrer"
 			class="btn-dl animate-in delay-3"
@@ -188,7 +150,7 @@
 	height: 100vh;
 	min-height: 640px;
 	overflow: hidden;
-	background: #0B0B0F;
+	background: var(--background-50);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -209,12 +171,9 @@
 	pointer-events: none;
 	z-index: 2;
 	background:
-		linear-gradient(to bottom, #0B0B0F 0%, transparent 12%, transparent 88%, #0B0B0F 100%),
-		linear-gradient(to right, rgba(11,11,15,0.5) 0%, transparent 18%, transparent 82%, rgba(11,11,15,0.5) 100%),
-		radial-gradient(ellipse 50% 55% at 50% 50%, rgba(11,11,15,0.72) 0%, rgba(11,11,15,0.30) 50%, transparent 100%);
+		linear-gradient(to bottom, #f2f2f2 0%, transparent 8%, transparent 92%, #f2f2f2 100%);
 }
 
-/* ── Content ── */
 .hero-content {
 	position: relative;
 	z-index: 10;
@@ -228,7 +187,7 @@
 
 @media (max-width: 768px) {
 	.hero {
-		padding-top: 80px; /* Account for fixed header if needed, but it's flex centered */
+		padding-top: 80px; 
 	}
 	.hero-content {
 		max-width: 100%;
@@ -243,9 +202,9 @@
 	font-size: 11px;
 	font-weight: 500;
 	letter-spacing: 0.6px;
-	color: rgba(167,139,250,0.85);
-	background: rgba(109,40,217,0.10);
-	border: 1px solid rgba(167,139,250,0.18);
+	color: var(--primary-600);
+	background: var(--primary-50);
+	border: 1px solid rgba(161,3,252,0.20);
 	padding: 5px 14px;
 	border-radius: 999px;
 	backdrop-filter: blur(12px);
@@ -262,14 +221,14 @@
 .badge-dot {
 	width: 5px; height: 5px;
 	border-radius: 50%;
-	background: #A78BFA;
+	background: var(--primary-500);
 	flex-shrink: 0;
 	animation: dot-pulse 2.4s ease-in-out infinite;
 }
 
 @keyframes dot-pulse {
-	0%,100% { box-shadow: 0 0 4px rgba(167,139,250,0.5); }
-	50%      { box-shadow: 0 0 14px rgba(167,139,250,1), 0 0 28px rgba(109,40,217,0.5); }
+	0%,100% { box-shadow: 0 0 4px rgba(161,3,252,0.4); }
+	50%      { box-shadow: 0 0 14px rgba(161,3,252,0.9), 0 0 28px rgba(85,43,212,0.4); }
 }
 
 .headline {
@@ -278,9 +237,9 @@
 	font-weight: 800;
 	line-height: 1.08;
 	letter-spacing: -1.5px;
-	color: #fff;
+	color: var(--text-950);
 	margin: 0 0 20px 0;
-	text-shadow: 0 0 80px rgba(109,40,217,0.30);
+	text-shadow: 0 0 60px rgba(161,3,252,0.15);
 }
 
 @media (max-width: 768px) {
@@ -290,7 +249,7 @@
 }
 
 .headline-grad {
-	background: linear-gradient(105deg, #A78BFA 0%, #C4B5FD 28%, #F472B6 58%, #60A5FA 100%);
+	background: linear-gradient(105deg, #a103fc 0%, #8102ca 25%, #552bd4 55%, #06f99c 100%);
 	background-size: 220% 100%;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -307,10 +266,10 @@
 	font-family: 'Inter', sans-serif;
 	font-size: 15px;
 	line-height: 1.65;
-	color: rgba(255,255,255,0.46);
+	color: var(--text-600);
 	margin: 0 0 34px 0;
 	max-width: 490px;
-	text-shadow: 0 2px 16px rgba(0,0,0,0.5);
+	text-shadow: none;
 }
 
 @media (max-width: 480px) {
@@ -324,7 +283,7 @@
 	display: inline-flex;
 	align-items: center;
 	gap: 13px;
-	background: linear-gradient(140deg, #6D28D9 0%, #7C3AED 100%);
+	background: linear-gradient(140deg, #a103fc 0%, #8102ca 100%);
 	color: #fff;
 	text-decoration: none;
 	font-family: 'Inter', sans-serif;
@@ -332,20 +291,20 @@
 	font-weight: 600;
 	padding: 15px 32px;
 	border-radius: 14px;
-	border: 1px solid rgba(167,139,250,0.30);
+	border: 1px solid rgba(161,3,252,0.25);
 	box-shadow:
-		0 0 0 1px rgba(109,40,217,0.30),
-		0 8px 36px rgba(109,40,217,0.45),
-		0 0 80px rgba(109,40,217,0.12);
+		0 0 0 1px rgba(161,3,252,0.20),
+		0 8px 36px rgba(161,3,252,0.30),
+		0 0 80px rgba(161,3,252,0.08);
 	transition: transform 0.18s, box-shadow 0.18s;
 }
 
 .btn-dl:hover {
 	transform: translateY(-2px);
 	box-shadow:
-		0 0 0 1px rgba(167,139,250,0.45),
-		0 14px 48px rgba(109,40,217,0.60),
-		0 0 100px rgba(109,40,217,0.20);
+		0 0 0 1px rgba(161,3,252,0.40),
+		0 14px 48px rgba(161,3,252,0.45),
+		0 0 100px rgba(161,3,252,0.15);
 }
 
 .win-ico { width: 17px; height: 17px; flex-shrink: 0; opacity: 0.88; }
@@ -353,11 +312,11 @@
 .btn-meta {
 	font-size: 10.5px;
 	font-weight: 400;
-	color: rgba(255,255,255,0.45);
+	color: rgba(255,255,255,0.55);
 	white-space: nowrap;
 	margin-left: 4px;
 	padding-left: 13px;
-	border-left: 1px solid rgba(255,255,255,0.15);
+	border-left: 1px solid rgba(255,255,255,0.20);
 }
 
 .scroll-cue {
@@ -369,7 +328,7 @@
 
 .scroll-bar {
 	width: 1px; height: 40px;
-	background: linear-gradient(to bottom, #A78BFA, transparent);
+	background: linear-gradient(to bottom, var(--primary-500), transparent);
 	animation: drop 2s ease-in-out infinite;
 }
 

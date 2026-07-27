@@ -4,7 +4,7 @@
 	<div class="dl-content">
 		<div class="section-label animate-in">Get Started</div>
 		<h2 class="dl-title animate-in delay-1">
-			Download CloudSpark<br />
+			Download Euler<br />
 			<span class="dl-accent">and take control.</span>
 		</h2>
 		<p class="dl-sub animate-in delay-2">
@@ -13,7 +13,7 @@
 		</p>
 
 		<a
-			href="https://github.com/Star-Plus/CloudSpark-Desktop/releases/latest"
+			href="https://github.com/Star-Plus/Euler-Desktop/releases/latest"
 			target="_blank"
 			rel="noopener noreferrer"
 			class="dl-btn animate-in delay-3"
@@ -47,23 +47,9 @@
 			<div class="footer-brand">
 				<div class="footer-logo">
 					<img src="Logo.png" alt="" />
-					<span>CloudSpark</span>
+					<span>Euler</span>
 				</div>
 				<p>Version control for digital creatives. Track everything. Never lose a pixel again.</p>
-				
-				<div class="footer-qr">
-					<div class="qr-content">
-						<img 
-							src={`https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent('https://cloudspark.web.app/verify/lab-results')}&color=ffffff&bgcolor=0b0b0f`} 
-							alt="QR Code for Lab Results" 
-							class="qr-code" 
-						/>
-						<div class="qr-text">
-							<span class="qr-label">Lab Tested & Verified</span>
-							<span class="qr-sub">Scan to verify batch purity</span>
-						</div>
-					</div>
-				</div>
 			</div>
 			
 			<div class="footer-links">
@@ -90,7 +76,7 @@
 		</div>
 		
 		<div class="footer-bottom">
-			<div class="copyright">© 2026 CloudSpark. All rights reserved.</div>
+			<div class="copyright">© 2026 Euler. All rights reserved.</div>
 			<div class="legal-links">
 				<a href="#">Privacy Policy</a>
 				<a href="#">Terms of Service</a>
@@ -107,7 +93,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background: #0B0B0F;
+	background: var(--background-50);
 	position: relative;
 	overflow: hidden;
 	padding: 80px 0 0 0;
@@ -121,7 +107,7 @@
 	width: 100%;
 	max-width: 800px;
 	height: 500px;
-	background: radial-gradient(ellipse, rgba(109,40,217,0.14) 0%, transparent 65%);
+	background: radial-gradient(ellipse, rgba(161,3,252,0.08) 0%, transparent 65%);
 	pointer-events: none;
 }
 
@@ -143,7 +129,7 @@
 	font-weight: 500;
 	letter-spacing: 1.5px;
 	text-transform: uppercase;
-	color: rgba(167,139,250,0.70);
+	color: var(--primary-600);
 	margin-bottom: 16px;
 }
 
@@ -153,7 +139,7 @@
 	font-weight: 700;
 	line-height: 1.15;
 	letter-spacing: -1px;
-	color: #fff;
+	color: var(--text-950);
 	margin: 0 0 18px 0;
 }
 
@@ -164,7 +150,7 @@
 }
 
 .dl-accent {
-	background: linear-gradient(105deg, #A78BFA, #F472B6);
+	background: linear-gradient(105deg, #a103fc, #552bd4);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
@@ -174,7 +160,7 @@
 	font-family: 'Inter', sans-serif;
 	font-size: 14.5px;
 	line-height: 1.7;
-	color: rgba(255,255,255,0.42);
+	color: var(--text-600);
 	margin: 0 0 36px 0;
 	max-width: 440px;
 }
@@ -183,16 +169,16 @@
 	display: inline-flex;
 	align-items: center;
 	gap: 16px;
-	background: linear-gradient(140deg, #6D28D9 0%, #7C3AED 100%);
+	background: linear-gradient(140deg, #a103fc 0%, #8102ca 100%);
 	color: #fff;
 	text-decoration: none;
 	padding: 16px 32px;
 	border-radius: 16px;
-	border: 1px solid rgba(167,139,250,0.30);
+	border: 1px solid rgba(161,3,252,0.25);
 	box-shadow:
-		0 0 0 1px rgba(109,40,217,0.30),
-		0 10px 40px rgba(109,40,217,0.45),
-		0 0 80px rgba(109,40,217,0.12);
+		0 0 0 1px rgba(161,3,252,0.20),
+		0 10px 40px rgba(161,3,252,0.30),
+		0 0 80px rgba(161,3,252,0.08);
 	transition: transform 0.18s, box-shadow 0.18s;
 	margin-bottom: 36px;
 	max-width: 100%;
@@ -240,7 +226,7 @@
 	gap: 7px;
 	font-family: 'Inter', sans-serif;
 	font-size: 12px;
-	color: rgba(255,255,255,0.40);
+	color: var(--text-600);
 }
 
 .req-check { width: 14px; height: 14px; color: #34D399; flex-shrink: 0; }
@@ -248,8 +234,8 @@
 /* ── Footer ── */
 .cool-footer {
 	width: 100%;
-	background: rgba(255, 255, 255, 0.02);
-	border-top: 1px solid rgba(255, 255, 255, 0.05);
+	background: var(--background-100);
+	border-top: 1px solid var(--background-200);
 	backdrop-filter: blur(20px);
 	-webkit-backdrop-filter: blur(20px);
 	padding: 60px 40px 30px;
@@ -265,7 +251,7 @@
 	flex-wrap: wrap;
 	gap: 40px;
 	padding-bottom: 40px;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+	border-bottom: 1px solid var(--background-200);
 }
 
 .footer-brand {
@@ -279,70 +265,24 @@
 	font-family: 'Bricolage Grotesque', sans-serif;
 	font-weight: 700;
 	font-size: 20px;
-	color: #fff;
+	color: var(--text-950);
 	margin-bottom: 16px;
 }
 
 .footer-logo img {
-	width: 24px;
-	height: 24px;
+	width: 28px;
+	height: 28px;
 	object-fit: contain;
 }
 
 .footer-brand p {
 	font-family: 'Inter', sans-serif;
 	font-size: 14px;
-	color: rgba(255, 255, 255, 0.4);
+	color: var(--text-600);
 	line-height: 1.6;
-	margin: 0 0 24px 0;
+	margin: 0;
 }
 
-.footer-qr {
-	background: rgba(255, 255, 255, 0.03);
-	border: 1px solid rgba(255, 255, 255, 0.05);
-	border-radius: 12px;
-	padding: 12px;
-	display: inline-block;
-}
-
-.qr-content {
-	display: flex;
-	align-items: center;
-	gap: 12px;
-}
-
-.qr-code {
-	width: 60px;
-	height: 60px;
-	border-radius: 6px;
-	opacity: 0.9;
-	transition: opacity 0.2s;
-}
-
-.footer-qr:hover .qr-code {
-	opacity: 1;
-}
-
-.qr-text {
-	display: flex;
-	flex-direction: column;
-	gap: 2px;
-}
-
-.qr-label {
-	font-family: 'Inter', sans-serif;
-	font-size: 11px;
-	font-weight: 700;
-	color: #fff;
-	text-transform: uppercase;
-	letter-spacing: 0.5px;
-}
-
-.qr-sub {
-	font-family: 'Inter', sans-serif;
-	font-size: 10px;
-	color: rgba(255, 255, 255, 0.4);
-}
 
 .footer-links {
 	display: flex;
@@ -360,7 +300,7 @@
 	font-family: 'Inter', sans-serif;
 	font-size: 12px;
 	font-weight: 600;
-	color: #fff;
+	color: var(--text-900);
 	margin: 0 0 8px 0;
 	text-transform: uppercase;
 	letter-spacing: 1.5px;
@@ -370,14 +310,14 @@
 .link-col a {
 	font-family: 'Inter', sans-serif;
 	font-size: 14px;
-	color: rgba(255, 255, 255, 0.5);
+	color: var(--text-600);
 	text-decoration: none;
 	transition: color 0.2s, transform 0.2s;
 	display: inline-block;
 }
 
 .link-col a:hover {
-	color: #A78BFA;
+	color: var(--primary-500);
 	transform: translateX(3px);
 }
 
@@ -389,7 +329,7 @@
 	margin: 30px auto 0;
 	font-family: 'Inter', sans-serif;
 	font-size: 13px;
-	color: rgba(255, 255, 255, 0.3);
+	color: var(--text-500);
 	flex-wrap: wrap;
 	gap: 20px;
 }
@@ -400,13 +340,13 @@
 }
 
 .legal-links a {
-	color: rgba(255, 255, 255, 0.3);
+	color: var(--text-500);
 	text-decoration: none;
 	transition: color 0.2s;
 }
 
 .legal-links a:hover {
-	color: #fff;
+	color: var(--text-900);
 }
 
 @media (max-width: 768px) {

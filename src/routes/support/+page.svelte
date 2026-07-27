@@ -1,9 +1,9 @@
 <script>
 	const faqs = [
-		{ q: 'How do I recover an old version of my PSD file?', a: 'You can browse your local timeline within CloudSpark desktop, click on any previous commit, and simply hit "Restore". CloudSpark will seamlessly recover the file states without duplicating your heavy PSD binaries.' },
-		{ q: 'Is there a file size limit?', a: 'No. CloudSpark is built to handle massive binary files typical of 3D and 2D design workflows. You are only limited by your local disk space, and your cloud tier if syncing.' },
-		{ q: 'What happens if I go offline?', a: 'CloudSpark is a local-first version control system. All your commits, timelines, and diffs are instantaneous perfectly offline. Cloud sync will automatically resume when you reconnect.' },
-		{ q: 'Can I use CloudSpark with Git?', a: 'CloudSpark operates independently of vanilla Git to provide blazing fast speeds on massive binaries, but you can export repos if desired.' }
+		{ q: 'How do I recover an old version of my PSD file?', a: 'You can browse your local timeline within Euler desktop, click on any previous commit, and simply hit "Restore". Euler will seamlessly recover the file states without duplicating your heavy PSD binaries.' },
+		{ q: 'Is there a file size limit?', a: 'No. Euler is built to handle massive binary files typical of 3D and 2D design workflows. You are only limited by your local disk space, and your cloud tier if syncing.' },
+		{ q: 'What happens if I go offline?', a: 'Euler is a local-first version control system. All your commits, timelines, and diffs are instantaneous perfectly offline. Cloud sync will automatically resume when you reconnect.' },
+		{ q: 'Can I use Euler with Git?', a: 'Euler operates independently of vanilla Git to provide blazing fast speeds on massive binaries, but you can export repos if desired.' }
 	];
 
 	let activeFaq = -1;
@@ -15,7 +15,7 @@
 </script>
 
 <svelte:head>
-	<title>Support — CloudSpark</title>
+	<title>Support — Euler</title>
 </svelte:head>
 
 <div class="page-body">

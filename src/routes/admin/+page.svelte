@@ -64,7 +64,7 @@
 </script>
 
 <svelte:head>
-	<title>Admin Dashboard — CloudSpark</title>
+	<title>Admin Dashboard — Euler</title>
 </svelte:head>
 
 <div class="admin-container animate-in">

@@ -8,12 +8,10 @@
 </script>
 
 <div class="app-root">
-	<!-- Fixed navbar -->
 	<div class="navbar-wrapper">
 		<Header />
 	</div>
 
-	<!-- Page content -->
 	<main>
 		{@render children()}
 	</main>
@@ -22,22 +20,19 @@
 <style>
 	.app-root {
 		min-height: 100vh;
-		background: #0B0B0F;
-		color: #ffffff;
+		background: var(--background-50);
+		color: var(--text-950);
 	}
 
 	.navbar-wrapper {
 		position: fixed;
-		top: 0;
+		top: 20px;
 		left: 0;
 		width: 100%;
-		z-index: 100;
+		z-index: 1000;
 		display: flex;
 		justify-content: center;
-		background: rgba(11, 11, 15, 0.6);
-		backdrop-filter: blur(16px);
-		-webkit-backdrop-filter: blur(16px);
-		border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+		pointer-events: none;
 	}
 
 	main {

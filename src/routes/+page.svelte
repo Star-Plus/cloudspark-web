@@ -130,6 +130,22 @@
 		window.addEventListener('touchstart', handleTouchStart, { passive: true });
 		window.addEventListener('touchend', handleTouchEnd, { passive: true });
 
+		const handleNav = (/** @type {any} */ e) => {
+			if (e.detail !== undefined && typeof e.detail === 'number') {
+				goToSection(e.detail);
+			}
+		};
+		window.addEventListener('nav-to-section', handleNav);
+
+		const params = new URLSearchParams(window.location.search);
+		const sec = params.get('section');
+		if (sec !== null) {
+			const idx = parseInt(sec, 10);
+			if (!isNaN(idx) && idx >= 0 && idx < totalSections) {
+				setTimeout(() => goToSection(idx), 50);
+			}
+		}
+
 		return () => {
 			document.body.classList.remove('home-lock');
 			document.documentElement.classList.remove('home-lock');
@@ -139,6 +155,7 @@
 			window.removeEventListener('keydown', handleKey);
 			window.removeEventListener('touchstart', handleTouchStart);
 			window.removeEventListener('touchend', handleTouchEnd);
+			window.removeEventListener('nav-to-section', handleNav);
 		};
 	});
 
@@ -155,10 +172,10 @@
 </script>
 
 <svelte:head>
-	<title>CloudSpark — Version Control for Digital Artists</title>
+	<title>Euler — Version Control for Digital Artists</title>
 	<meta
 		name="description"
-		content="CloudSpark is a native Windows app that gives digital artists professional version control for any file type — images, video, audio, 3D assets."
+		content="Euler is a native Windows app that gives digital artists professional version control for any file type — images, video, audio, 3D assets."
 	/>
 </svelte:head>
 
@@ -225,8 +242,8 @@
 /* ── Global Animation Utilities ── */
 :global(.animate-in) {
 	opacity: 0;
-	transform: translateY(30px);
-	transition: opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+	transform: translateY(24px);
+	transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
 	will-change: opacity, transform;
 }
 

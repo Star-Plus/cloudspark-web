@@ -4,13 +4,13 @@
 </script>
 
 <svelte:head>
-	<title>Changelog — CloudSpark</title>
+	<title>Changelog — Euler</title>
 </svelte:head>
 
 <div class="page-body">
 	<div class="header-section">
 		<h1 class="page-title animate-in">Changelog</h1>
-		<p class="page-sub animate-in delay-1">See what's new and what's changed in CloudSpark.</p>
+		<p class="page-sub animate-in delay-1">See what's new and what's changed in Euler.</p>
 	</div>
 
 	<div class="timeline animate-in delay-2">
@@ -48,7 +48,7 @@
 	font-family: 'Bricolage Grotesque', sans-serif;
 	font-size: 48px;
 	font-weight: 700;
-	color: #fff;
+	color: var(--text-950);
 	margin: 0 0 16px 0;
 	letter-spacing: -1px;
 }
@@ -56,7 +56,7 @@
 .page-sub {
 	font-family: 'Inter', sans-serif;
 	font-size: 16px;
-	color: rgba(255,255,255,0.5);
+	color: var(--text-600);
 	margin: 0;
 }
 
@@ -97,19 +97,19 @@
 	font-family: 'Inter', sans-serif;
 	font-size: 14px;
 	font-weight: 700;
-	color: #A78BFA;
+	color: var(--primary-600);
 	margin-bottom: 4px;
 }
 
 .log-date {
 	font-family: 'Inter', sans-serif;
 	font-size: 13px;
-	color: rgba(255,255,255,0.4);
+	color: var(--text-500);
 }
 
 .log-content {
-	background: rgba(255,255,255,0.02);
-	border: 1px solid rgba(255,255,255,0.05);
+	background: rgba(161,3,252,0.03);
+	border: 1px solid rgba(161,3,252,0.08);
 	border-radius: 12px;
 	padding: 24px 32px;
 	position: relative;
@@ -121,8 +121,8 @@
 	left: -33px;
 	top: 24px;
 	width: 12px; height: 12px;
-	background: #0B0B0F;
-	border: 2px solid #8B5CF6;
+	background: var(--background-50);
+	border: 2px solid var(--primary-500);
 	border-radius: 50%;
 	z-index: 2;
 }
@@ -137,14 +137,14 @@
 	font-family: 'Bricolage Grotesque', sans-serif;
 	font-size: 20px;
 	font-weight: 600;
-	color: #fff;
+	color: var(--text-900);
 	margin: 0 0 12px 0;
 }
 
 .log-body {
 	font-family: 'Inter', sans-serif;
 	font-size: 14.5px;
-	color: rgba(255,255,255,0.6);
+	color: var(--text-600);
 	line-height: 1.6;
 	margin: 0;
 }

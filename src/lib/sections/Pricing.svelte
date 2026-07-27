@@ -121,7 +121,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: #0B0B0F;
+	background: var(--background-50);
 	position: relative;
 	overflow: hidden;
 	padding: 0;
@@ -135,7 +135,7 @@
 	width: 100%;
 	max-width: 1000px;
 	height: 600px;
-	background: radial-gradient(ellipse, rgba(167,139,250,0.18) 0%, transparent 60%);
+	background: radial-gradient(ellipse, rgba(161,3,252,0.10) 0%, transparent 60%);
 	pointer-events: none;
 }
 
@@ -154,20 +154,20 @@
 	font-family: 'Bricolage Grotesque', sans-serif;
 	font-size: clamp(32px, 5vw, 56px);
 	font-weight: 700;
-	color: #fff;
+	color: var(--text-950);
 	margin: 0 0 12px 0;
 	letter-spacing: -1px;
 	text-align: center;
 }
 
 .pricing-accent {
-	color: #A78BFA;
+	color: var(--primary-500);
 }
 
 .pricing-sub {
 	font-family: 'Inter', sans-serif;
 	font-size: 15px;
-	color: rgba(255,255,255,0.6);
+	color: var(--text-600);
 	margin: 0 0 50px 0;
 	text-align: center;
 }
@@ -197,8 +197,8 @@
 }
 
 .pricing-card {
-	background: rgba(30, 26, 45, 0.6);
-	border: 1px solid rgba(255,255,255,0.05);
+	background: rgba(161,3,252,0.04);
+	border: 1px solid rgba(161,3,252,0.10);
 	border-radius: 12px;
 	padding: 32px 24px;
 	display: flex;
@@ -210,23 +210,23 @@
 
 .pricing-card:hover {
 	transform: translateY(-5px);
-	background: rgba(40, 35, 60, 0.7);
+	background: rgba(161,3,252,0.08);
 }
 
 .pro-card {
-	border-color: rgba(167,139,250,0.3);
-	background: rgba(45, 30, 80, 0.4);
+	border-color: rgba(161,3,252,0.30);
+	background: rgba(161,3,252,0.08);
 }
 
 .pro-card:hover {
-	background: rgba(55, 35, 100, 0.5);
+	background: rgba(161,3,252,0.12);
 }
 
 .best-value {
 	position: absolute;
 	top: -12px;
 	right: 24px;
-	background: #8B5CF6;
+	background: var(--primary-500);
 	color: #fff;
 	font-family: 'Inter', sans-serif;
 	font-size: 10px;
@@ -240,13 +240,13 @@
 	font-family: 'Inter', sans-serif;
 	font-size: 18px;
 	font-weight: 600;
-	color: #fff;
+	color: var(--text-900);
 	margin: 0 0 16px 0;
 }
 
 .tier-price {
 	font-family: 'Inter', sans-serif;
-	color: #fff;
+	color: var(--text-950);
 	display: flex;
 	align-items: baseline;
 	gap: 6px;
@@ -260,19 +260,20 @@
 
 .price-cur {
 	font-size: 12px;
-	color: rgba(255,255,255,0.5);
+	color: var(--text-500);
 	font-weight: 500;
 }
 
 .price-contact {
 	font-size: 24px;
 	font-weight: 600;
+	color: var(--text-950);
 }
 
 .price-usd {
 	font-family: 'Inter', sans-serif;
 	font-size: 12px;
-	color: rgba(255,255,255,0.4);
+	color: var(--text-500);
 	margin-bottom: 32px;
 }
 
@@ -288,7 +289,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	border-bottom: 1px solid rgba(255,255,255,0.05);
+	border-bottom: 1px solid rgba(161,3,252,0.08);
 	padding-bottom: 8px;
 }
 
@@ -302,7 +303,7 @@
 	font-family: 'Inter', sans-serif;
 	font-size: 10px;
 	font-weight: 600;
-	color: rgba(255,255,255,0.4);
+	color: var(--text-500);
 	letter-spacing: 0.5px;
 	text-transform: uppercase;
 }
@@ -311,7 +312,7 @@
 	font-family: 'Inter', sans-serif;
 	font-size: 13px;
 	font-weight: 600;
-	color: #fff;
+	color: var(--text-950);
 	text-align: right;
 }
 
@@ -325,20 +326,19 @@
 
 .pricing-btn {
 	width: 100%;
-	background: #000;
+	background: var(--primary-500);
 	color: #fff;
 	font-family: 'Inter', sans-serif;
 	font-size: 13px;
 	font-weight: 600;
 	padding: 12px 0;
-	border: 1px solid rgba(255,255,255,0.1);
+	border: none;
 	border-radius: 6px;
 	cursor: pointer;
-	transition: background 0.2s, border-color 0.2s;
+	transition: background 0.2s;
 }
 
 .pricing-btn:hover {
-	background: #111;
-	border-color: rgba(255,255,255,0.2);
+	background: var(--primary-600);
 }
 </style>

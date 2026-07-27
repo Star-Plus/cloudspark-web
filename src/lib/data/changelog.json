@@ -3,7 +3,7 @@
         "version": "v0.1.0",
         "date": "April 2026",
         "title": "Early Access Release",
-        "body": "Initial public launch of CloudSpark Desktop. Complete with local version history, unlimited file sizes, and high-performance rust-based diffing engine. Supports PSD, BLEND, MP4, and standard image formats."
+        "body": "Initial public launch of Euler Desktop. Complete with local version history, unlimited file sizes, and high-performance rust-based diffing engine. Supports PSD, BLEND, MP4, and standard image formats."
     },
     {
         "version": "v0.0.5",
