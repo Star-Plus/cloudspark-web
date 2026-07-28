@@ -66,7 +66,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: #0B0B0F;
 	position: relative;
 	overflow: hidden;
 	padding: 80px 0;
@@ -87,7 +86,7 @@
 	font-weight: 500;
 	letter-spacing: 1.5px;
 	text-transform: uppercase;
-	color: rgba(167,139,250,0.70);
+	color: var(--color-primary);
 	margin-bottom: 16px;
 }
 
@@ -97,7 +96,6 @@
 	font-weight: 700;
 	line-height: 1.15;
 	letter-spacing: -1px;
-	color: #fff;
 	text-align: center;
 	margin: 0 0 40px 0;
 }
@@ -192,7 +190,7 @@
 	align-items: center;
 	justify-content: center;
 	margin-bottom: 16px;
-	color: #A78BFA;
+	color: var(--primary-500);
 }
 
 .card-icon svg {
@@ -204,15 +202,15 @@
 	font-family: 'Bricolage Grotesque', sans-serif;
 	font-size: 16px;
 	font-weight: 700;
-	color: #fff;
 	margin: 0 0 8px 0;
 	letter-spacing: -0.2px;
+	color: var(--text-800);
 }
 
 .card p {
 	font-family: 'Inter', sans-serif;
 	font-size: 13px;
-	color: rgba(255,255,255,0.40);
+	color: var(--text-600);
 	line-height: 1.6;
 	margin: 0;
 }

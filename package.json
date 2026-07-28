@@ -29,7 +29,9 @@
 		"vite": "^7.2.2"
 	},
 	"dependencies": {
-		"axios": "^1.13.2"
+		"axios": "^1.13.2",
+		"postprocessing": "^6.39.4",
+		"three": "^0.185.1"
 	},
 	"overrides": {
 		"cookie": "^0.7.0"

@@ -1,115 +1,71 @@
-<script>
-	import { onMount, onDestroy } from 'svelte';
+<script lang="ts">
+    import { onMount } from "svelte";
+    import DotField from "$lib/components/DotField.svelte";
+    import Silk from "$lib/components/Silk.svelte";
 
-	/** @type {HTMLCanvasElement} */
-	let canvas;
-	let animId = 0;
-	let W = 0, H = 0;
-	let mouseX = 0.5, mouseY = 0.5;
-	let targetX = 0.5, targetY = 0.5;
+    let heroRef: HTMLElement | null = null;
+    let isScrolled = false;
 
-	const RIBBONS = [
-		{ hue: [265, 295], yBase: 0.30, amplitude: 75, width: 230, speed: 0.00022, alpha: 0.16 },
-		{ hue: [275, 310], yBase: 0.52, amplitude: 90, width: 260, speed: 0.00016, alpha: 0.14 },
-		{ hue: [155, 172], yBase: 0.65, amplitude: 65, width: 200, speed: 0.00026, alpha: 0.13 },
-		{ hue: [245, 275], yBase: 0.20, amplitude: 55, width: 180, speed: 0.00019, alpha: 0.11 },
-	];
+    onMount(() => {
+        const checkScroll = () => {
+            const wrapper = heroRef?.closest('.section-wrapper');
+            const st = wrapper?.scrollTop || window.scrollY || 0;
+            isScrolled = st > 5;
+        };
 
-	onMount(() => {
-		const ctx = canvas.getContext('2d', { alpha: true });
-		if (!ctx) return;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.target === heroRef) {
+                    if (entry.intersectionRatio < 0.98) {
+                        isScrolled = true;
+                    } else {
+                        checkScroll();
+                    }
+                }
+            });
+        }, {
+            threshold: [0.95, 0.98, 1.0]
+        });
 
-		const resize = () => {
-			if (!canvas) return;
-			W = canvas.width  = canvas.offsetWidth;
-			H = canvas.height = canvas.offsetHeight;
-		};
-		resize();
-		window.addEventListener('resize', resize);
+        if (heroRef) observer.observe(heroRef);
 
-		const onMove = (/** @type {MouseEvent} */ e) => {
-			targetX = e.clientX / window.innerWidth;
-			targetY = e.clientY / window.innerHeight;
-		};
-		window.addEventListener('mousemove', onMove, { passive: true });
+        const wrapper = heroRef?.closest('.section-wrapper');
+        if (wrapper) wrapper.addEventListener('scroll', checkScroll, { passive: true });
+        window.addEventListener('scroll', checkScroll, { passive: true });
 
-		let skip = 0;
-
-		/**
-		 * @param {any} r
-		 * @param {number} t
-		 */
-		function drawRibbon(r, t) {
-			const steps = 60;
-			const ox = (mouseX - 0.5) * 28;
-			const oy = (mouseY - 0.5) * 16;
-			const hw = r.width / 2;
-
-			const xs = new Float32Array(steps + 1);
-			const ys = new Float32Array(steps + 1);
-			for (let i = 0; i <= steps; i++) {
-				const f = i / steps;
-				xs[i] = f * W;
-				ys[i] = r.yBase * H
-					+ Math.sin(f * 6.9  + t * r.speed)        * r.amplitude
-					+ Math.sin(f * 11.9 + t * r.speed * 0.7 + 1.5) * r.amplitude * 0.3
-					+ oy * Math.sin(f * Math.PI)
-					+ ox * 0.25;
-			}
-
-			const h1 = r.hue[0] + Math.sin(t * 0.00016) * 8;
-			const h2 = r.hue[1] + Math.cos(t * 0.00020) * 8;
-			const g  = ctx.createLinearGradient(0, 0, W, 0);
-			g.addColorStop(0,   `hsla(${h1},60%,60%,0)`);
-			g.addColorStop(0.2, `hsla(${h1},62%,62%,${r.alpha})`);
-			g.addColorStop(0.5, `hsla(${(h1+h2)/2},65%,65%,${r.alpha*1.1})`);
-			g.addColorStop(0.8, `hsla(${h2},62%,62%,${r.alpha})`);
-			g.addColorStop(1,   `hsla(${h2},60%,60%,0)`);
-
-			ctx.beginPath();
-			ctx.moveTo(xs[0], ys[0] - hw);
-			for (let i = 1; i <= steps; i++) {
-				const px = xs[i-1], py = ys[i-1], cx = xs[i], cy = ys[i];
-				ctx.quadraticCurveTo(px, py - hw, (px+cx)/2, (py+cy)/2 - hw);
-			}
-			for (let i = steps; i >= 0; i--) {
-				const cx = xs[i], cy = ys[i];
-				const px = i > 0 ? xs[i-1] : cx, py = i > 0 ? ys[i-1] : cy;
-				ctx.quadraticCurveTo(cx, cy + hw, (px+cx)/2, (py+cy)/2 + hw);
-			}
-			ctx.closePath();
-			ctx.fillStyle = g;
-			ctx.fill();
-		}
-
-		/** @param {number} ts */
-		function draw(ts) {
-			animId = requestAnimationFrame(draw);
-			skip ^= 1;
-			if (skip) return;
-
-			mouseX += (targetX - mouseX) * 0.05;
-			mouseY += (targetY - mouseY) * 0.05;
-
-			ctx.clearRect(0, 0, W, H);
-			for (const r of RIBBONS) drawRibbon(r, ts);
-		}
-
-		animId = requestAnimationFrame(draw);
-
-		return () => {
-			cancelAnimationFrame(animId);
-			window.removeEventListener('resize', resize);
-			window.removeEventListener('mousemove', onMove);
-		};
-	});
-
-	onDestroy(() => cancelAnimationFrame(animId));
+        return () => {
+            observer.disconnect();
+            if (wrapper) wrapper.removeEventListener('scroll', checkScroll);
+            window.removeEventListener('scroll', checkScroll);
+        };
+    });
 </script>
 
-<section class="hero">
-	<canvas bind:this={canvas} class="hero-canvas" aria-hidden="true"></canvas>
+<section bind:this={heroRef} class="hero">
+	<div class="hero-bg hero-silk" aria-hidden="true">
+		<Silk
+			speed={5}
+			scale={0.6}
+			color="#400165"
+			backgroundColor="#f2f2f2"
+			noiseIntensity={1.2}
+			rotation={80}
+		/>
+	</div>
+
+	<div class="hero-bg hero-dots" aria-hidden="true">
+		<DotField
+			dotRadius={2}
+			dotSpacing={20}
+			gradientFrom="rgba(161, 3, 252, 0.5)"
+			gradientTo="rgba(85, 43, 212, 0.35)"
+			waveAmplitude={2}
+			sparkle={true}
+		/>
+	</div>
+
 	<div class="hero-overlay" aria-hidden="true"></div>
+	<div class="hero-fade-bottom" class:is-scrolled={isScrolled} aria-hidden="true"></div>
 
 	<div class="hero-content">
 		<div class="badge animate-in">
@@ -156,12 +112,19 @@
 	justify-content: center;
 }
 
-.hero-canvas {
+.hero-bg {
 	position: absolute;
 	inset: 0;
-	width: 100% !important;
-	height: 100% !important;
-	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.hero-silk {
+	z-index: 1;
+}
+
+.hero-dots {
+	z-index: 2;
 	pointer-events: none;
 }
 
@@ -169,9 +132,32 @@
 	position: absolute;
 	inset: 0;
 	pointer-events: none;
-	z-index: 2;
-	background:
-		linear-gradient(to bottom, #f2f2f2 0%, transparent 8%, transparent 92%, #f2f2f2 100%);
+	z-index: 3;
+	background: radial-gradient(ellipse at 50% 50%, rgba(242,242,242,0.6) 0%, rgba(242,242,242,0.2) 50%, transparent 80%);
+}
+
+.hero-fade-bottom {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 180px;
+	pointer-events: none;
+	z-index: 4;
+	background: linear-gradient(
+		to bottom,
+		rgba(242, 242, 242, 0) 0%,
+		rgba(242, 242, 242, 0.25) 35%,
+		rgba(242, 242, 242, 0.75) 70%,
+		var(--background-50) 100%
+	);
+	opacity: 0;
+	transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	will-change: opacity;
+}
+
+.hero-fade-bottom.is-scrolled {
+	opacity: 1;
 }
 
 .hero-content {
@@ -200,14 +186,14 @@
 	gap: 8px;
 	font-family: 'Inter', sans-serif;
 	font-size: 11px;
-	font-weight: 500;
+	font-weight: 600;
 	letter-spacing: 0.6px;
-	color: var(--primary-600);
-	background: var(--primary-50);
-	border: 1px solid rgba(161,3,252,0.20);
-	padding: 5px 14px;
+	color: var(--primary-800);
+	background: rgba(255, 255, 255, 0.88);
+	border: 1px solid rgba(161, 3, 252, 0.25);
+	padding: 6px 15px;
 	border-radius: 999px;
-	backdrop-filter: blur(12px);
+	backdrop-filter: blur(16px);
 	margin-bottom: 24px;
 }
 
@@ -219,7 +205,7 @@
 }
 
 .badge-dot {
-	width: 5px; height: 5px;
+	width: 6px; height: 6px;
 	border-radius: 50%;
 	background: var(--primary-500);
 	flex-shrink: 0;
@@ -239,7 +225,6 @@
 	letter-spacing: -1.5px;
 	color: var(--text-950);
 	margin: 0 0 20px 0;
-	text-shadow: 0 0 60px rgba(161,3,252,0.15);
 }
 
 @media (max-width: 768px) {
@@ -249,7 +234,7 @@
 }
 
 .headline-grad {
-	background: linear-gradient(105deg, #a103fc 0%, #8102ca 25%, #552bd4 55%, #06f99c 100%);
+	background: linear-gradient(105deg, #ad1fff 0%, #8102ca 35%, #552bd4 70%, #400165 100%);
 	background-size: 220% 100%;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -264,12 +249,12 @@
 
 .sub {
 	font-family: 'Inter', sans-serif;
-	font-size: 15px;
+	font-size: 15.5px;
+	font-weight: 500;
 	line-height: 1.65;
-	color: var(--text-600);
+	color: var(--text-900);
 	margin: 0 0 34px 0;
 	max-width: 490px;
-	text-shadow: none;
 }
 
 @media (max-width: 480px) {
@@ -283,7 +268,7 @@
 	display: inline-flex;
 	align-items: center;
 	gap: 13px;
-	background: linear-gradient(140deg, #a103fc 0%, #8102ca 100%);
+	background: linear-gradient(140deg, #a91cfa 0%, #8102ca 100%);
 	color: #fff;
 	text-decoration: none;
 	font-family: 'Inter', sans-serif;
@@ -292,19 +277,10 @@
 	padding: 15px 32px;
 	border-radius: 14px;
 	border: 1px solid rgba(161,3,252,0.25);
-	box-shadow:
-		0 0 0 1px rgba(161,3,252,0.20),
-		0 8px 36px rgba(161,3,252,0.30),
-		0 0 80px rgba(161,3,252,0.08);
-	transition: transform 0.18s, box-shadow 0.18s;
 }
 
 .btn-dl:hover {
 	transform: translateY(-2px);
-	box-shadow:
-		0 0 0 1px rgba(161,3,252,0.40),
-		0 14px 48px rgba(161,3,252,0.45),
-		0 0 100px rgba(161,3,252,0.15);
 }
 
 .win-ico { width: 17px; height: 17px; flex-shrink: 0; opacity: 0.88; }
@@ -319,22 +295,10 @@
 	border-left: 1px solid rgba(255,255,255,0.20);
 }
 
-.scroll-cue {
-	position: absolute;
-	bottom: 26px; left: 50%;
-	transform: translateX(-50%);
-	z-index: 10; opacity: 0.40;
-}
-
-.scroll-bar {
-	width: 1px; height: 40px;
-	background: linear-gradient(to bottom, var(--primary-500), transparent);
-	animation: drop 2s ease-in-out infinite;
-}
-
 @keyframes drop {
 	0%   { transform: scaleY(0); transform-origin: top;    opacity: 1; }
 	55%  { transform: scaleY(1); transform-origin: top;    opacity: 1; }
 	100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
 }
 </style>
+
